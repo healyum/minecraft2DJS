@@ -39,3 +39,9 @@ var Bedrock = {
 	posX : 1,
 	posY : 1,
 };
+
+var Coal = {
+	name : 'coal',
+	posX : 2,
+	posY : 2,
+}

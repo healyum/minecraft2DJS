@@ -36,3 +36,25 @@ function drawTree(ctx, spriteSheetImg, posX, posY) {
 		}
 	}
 }
+
+function generateCoal(ctx, spriteSheetImg, posX, posY) {
+	var frequency = getRandomNumber(30);
+
+	if (frequency == 7) {
+		for (var i = 0; i < 2; i++) {
+			for (var j = 2; j >= 0; j--) {
+				var sourceX = Coal.posX * spriteWidth;
+				var sourceY = Coal.posY * spriteHeight;
+
+				// TODO : ajouter une classe MineralPattern et dessiner aléatoirement la liste de pattern qui sera passée
+				canvasX = (posX + i) * spriteWidth;
+				canvasY = (posY - j) * spriteHeight;
+
+				ctx.drawImage(spriteSheetImg,
+				sourceX, sourceY, spriteWidth, spriteHeight,
+				canvasX, canvasY, spriteWidth, spriteHeight);
+			}
+		}
+	}
+	return false;
+}
