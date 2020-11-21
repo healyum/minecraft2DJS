@@ -23,10 +23,24 @@
 		var spriteWidth = (spriteSheetWidth / spriteSheetCols);
 		var spriteHeight = (spriteSheetHeight / spriteSheetRows);
 
+		// Layers of the world
+		const SKY_LAYER = 5;
+		const GRASS_LAYER = 6;
+		const DIRT_LAYER = 8;
+		const STONE_OR_DIRT_LAYER = 13;
+		const STONE_LAYER = 37;
+		const STONE_OR_BEDROCK_LAYER = 39;
+		const BEDROCK_LAYER = 40;
+
 		function initializeLevel() {
 			canvas = document.getElementById("canvas");
 		    if (canvas.getContext) {
 		    	ctx = canvas.getContext("2d");
+		    	// remove unexpected space between tiles
+		    	ctx.mozImageSmoothingEnabled = false;
+		    	ctx.webkitImageSmoothingEnabled = false;
+		    	ctx.imageSmoothingEnabled = false;
+
 		    	ctx.scale(3, 3);
         	}
 
@@ -35,13 +49,6 @@
 			spriteSheetImg.onload = start;
 		}
 
-		const SKY_LAYER = 5;
-		const GRASS_LAYER = 6;
-		const DIRT_LAYER = 8;
-		const STONE_OR_DIRT_LAYER = 13;
-		const STONE_LAYER = 37;
-		const STONE_OR_BEDROCK_LAYER = 39;
-		const BEDROCK_LAYER = 40;
 
 		function start() {
 			var canvasY = 0 - spriteHeight;
@@ -105,6 +112,14 @@
 	<style>
 		body{ background-color: black; margin: 0; }
 		canvas{ background-color: #6699ff; display: block; margin: 0 auto; }
+		canvas {
+		    image-rendering: optimizeSpeed;             // Older versions of FF
+		    image-rendering: -moz-crisp-edges;          // FF 6.0+
+		    image-rendering: -webkit-optimize-contrast; // Webkit
+		    image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
+		    image-rendering: optimize-contrast;         // Possible future browsers.
+		    -ms-interpolation-mode: nearest-neighbor;   // IE
+		}
 	</style>
 </head>
 <body onload="initializeLevel()">

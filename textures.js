@@ -24,7 +24,7 @@ var Stone = {
 
 var Leaf = {
 	name : 'leaf',
-	posX : 4,
+	posX : 5,
 	posY : 3,
 };
 
