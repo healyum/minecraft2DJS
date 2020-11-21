@@ -45,3 +45,9 @@ var Coal = {
 	posX : 2,
 	posY : 2,
 }
+
+var Diamond = {
+	name : 'diamond',
+	posX : 2,
+	posY : 3,
+}

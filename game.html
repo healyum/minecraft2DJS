@@ -30,7 +30,8 @@
 		const GRASS_LAYER = 6;
 		const DIRT_LAYER = 8;
 		const STONE_OR_DIRT_LAYER = 13;
-		const STONE_LAYER = 37;
+		const STONE_LAYER = 32;
+		const DIAMOND_LAYER = 37;
 		const STONE_OR_BEDROCK_LAYER = 39;
 		const BEDROCK_LAYER = 40;
 
@@ -85,7 +86,13 @@
 			            generateCoal(ctx, spriteSheetImg, row, col);
 		        	}
 
-		        	if (col >= STONE_LAYER && col < STONE_OR_BEDROCK_LAYER) {
+		        	if (col >= STONE_LAYER && col < DIAMOND_LAYER) {
+			            var sourceX = Stone.posX * spriteWidth;
+			            var sourceY = Stone.posY * spriteHeight;
+			            generateDiamond(ctx, spriteSheetImg, row, col);
+		        	}
+
+		        	if (col >= DIAMOND_LAYER && col < STONE_OR_BEDROCK_LAYER) {
 		        		var randomStoneOrBedrock = randomNumberFromList([Stone, Bedrock])
 			            var sourceX = randomStoneOrBedrock.posX * spriteWidth;
 			            var sourceY = randomStoneOrBedrock.posY * spriteHeight;
