@@ -1,0 +1,163 @@
+<!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>MinecraftJS</title>
+  <script type="text/javascript">
+  					// Spritesheet
+				var spriteSheetWidth = 700; // TODO : récupérer witdh image
+				var spriteSheetHeight = 700;
+				var spriteSheetCols = 16;
+				var spriteSheetRows = 16;
+
+				// Sprite
+				var spriteWidth = spriteSheetWidth / spriteSheetCols;
+				var spriteHeight = spriteSheetHeight / spriteSheetRows;
+
+		var Grass = {
+			name : 'grass',
+			posX : 2,
+			posY : 0,
+		};
+
+		var Dirt = {
+			name : 'dirt',
+			posX : 0,
+			posY : 0,
+		};
+
+		var Sky = {
+			name : 'sky',
+			posX : 4,
+			posY : 1,
+		};
+
+		var Stone = {
+			name : 'stone',
+			posX : 1,
+			posY : 0,
+		};
+
+		var Leaf = {
+			name : 'leaf',
+			posX : 1,
+			posY : 1,
+		};
+
+		var Wood = {
+			name : 'wood',
+			posX : 0,
+			posY : 1,
+		};
+
+  		function randomNumberFromList(items) {
+  			// TODO : pouvoir générer à partir liste de tuile passée en paramètre qui retourne correspondance position
+  			// et retourner Y
+  			var item = items[Math.floor(Math.random()*items.length)];
+  			return item;
+  		}
+
+  		function drawTree(ctx, spriteSheetImg, posX, posY) {
+        	var draw = false;
+
+        	for (var i = 0; i < 3; i++) {
+        		for (var j = 4; j >= 0; j--) {
+        			draw = false;
+
+        			// Feuille du dessus
+		        	if (i == 1 && j == 4) {
+			            var sourceX = Leaf.posX * spriteWidth;
+			            var sourceY = Leaf.posY * spriteHeight;
+			            draw = true;
+		        	}
+        			// Feuilles
+			       	if ((i == 0 || i == 1 || i == 2) && (j == 2 || j == 3)) {
+			            var sourceX = Leaf.posX * spriteWidth;
+			            var sourceY = Leaf.posY * spriteHeight;
+			            draw = true;
+		        	}
+
+		        	// Tronc
+		        	if (i == 1 && (j == 0 || j == 1)) {
+		        		var sourceX = Wood.posX * spriteWidth;
+			            var sourceY = Wood.posY * spriteHeight;
+			            draw = true;
+		        	}
+
+		            canvasX = (posX + i) * spriteWidth;
+		            canvasY = (posY - j) * spriteHeight;
+
+		            if (draw == true) {
+						ctx.drawImage(spriteSheetImg,
+						sourceX, sourceY, spriteWidth, spriteHeight,
+						canvasX, canvasY, spriteWidth, spriteHeight);
+		            }
+				}
+        	}
+  		}
+
+
+		function initializeLevel() {
+			var canvas = document.getElementById("canvas");
+		    if (canvas.getContext) {
+		    	var ctx = canvas.getContext("2d");
+        	}
+
+			var spriteSheetImg = new Image();
+			spriteSheetImg.onload = start;
+			spriteSheetImg.src = "texture.png";
+
+			console.log(spriteSheetImg);
+
+			function start() {
+
+
+				var canvasY = 0 - spriteHeight;
+				var canvasX = 0 - spriteWidth;
+			    for (var col = 0; col < spriteSheetCols; col++) {
+			        for (var row = 0; row < spriteSheetRows; row++) {
+
+			        	if (col < 5) {
+				            var sourceX = Sky.posX * spriteWidth;
+				            var sourceY = Sky.posY * spriteHeight;
+			        	}
+
+			        	if (col >= 5 && col < 6) {
+				            var sourceX = Grass.posX * spriteWidth;
+				            var sourceY = Grass.posY * spriteHeight;
+			        	}
+
+			        	if (col >= 6 && col < 10) {
+				            var sourceX = Dirt.posX * spriteWidth;
+				            var sourceY = Dirt.posY * spriteHeight;
+			        	}
+
+			        	if (col >= 10 && col < 20) {
+			        		var randomStoneOrDirt = randomNumberFromList([Stone.posX, Dirt.posY])
+				            var sourceX = randomStoneOrDirt * spriteWidth;
+				            var sourceY = 0 * spriteHeight;
+			        	}
+
+			            canvasX = row * spriteWidth;
+			            canvasY = col * spriteHeight;
+
+			            ctx.drawImage(spriteSheetImg,
+			            sourceX, sourceY, spriteWidth, spriteHeight,
+			            canvasX, canvasY, spriteWidth, spriteHeight);
+			        }
+			    }
+			    drawTree(ctx, spriteSheetImg, 7,4);
+			    drawTree(ctx, spriteSheetImg, 12,4);
+			}
+		}
+  </script>
+	<style>
+		body{ background-color: #AAAAAA; }
+		canvas{border:1px solid #348aed;}
+	</style>
+</head>
+<body onload="initializeLevel()">
+	<canvas id="canvas" width=700 height=700></canvas>
+</body>
+</html>
