@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>MinecraftJS</title>
-  <script type="text/javascript" src="textures.js"></script>
-  <script type="text/javascript" src="world-structures.js"></script>
-  <script type="text/javascript" src="randomizer.js"></script>
+  <link href="styles/game.css" rel="stylesheet">
+  <script type="text/javascript" src="js/textures.js"></script>
+  <script type="text/javascript" src="js/world-structures.js"></script>
+  <script type="text/javascript" src="js/randomizer.js"></script>
   <script type="text/javascript">
   		// Spritesheet
 		var spriteSheetWidth = 256; // TODO : récupérer witdh image
@@ -45,7 +46,7 @@
         	}
 
 			spriteSheetImg = new Image();
-			spriteSheetImg.src = "texture.png";
+			spriteSheetImg.src = "assets/images/texture.png";
 			spriteSheetImg.onload = start;
 		}
 
@@ -109,49 +110,7 @@
 		    // TODO : Instancier Steve quand le monde a fini son initialisation
 		}
   </script>
-	<style>
-		body { 
-			background-color: #6699ff; 
-			margin: 0; 
-		}
-		canvas { 
-			display: block; margin: 0 auto; 
-			image-rendering: optimizeSpeed;             // Older versions of FF
-			image-rendering: optimize-contrast;         // Possible future browsers.
-		}
-		.canvas-game {
-			position: absolute;
-			margin-left: auto;
-			margin-right: auto;
-			left: 0;
-			right: 0;
-			text-align: center;
-			z-index: 1;
-		}
-		.canvas-background {
-			position: absolute;
-			left: 0; 
-			top: 0; 
-			z-index: 0;
-		}
-		.container {
-			position: relative;
-		}
-		.sliding-background {
-			background: url("cloud.png") repeat-x;
-			height: 480px;
-			width: 3600px;
-			/*animation: slide 30s linear infinite; Remove comment to animate */
-		}
-		@keyframes slide{
-			0% {
-				transform: translate3d(0, 0, 0);
-			}
-			100% {
-				transform: translate3d(-1692px, 0, 0);
-			}
-		}
-	</style>
+
 </head>
 <body onload="initializeLevel()">
 	<div class="container">		
