@@ -4,98 +4,20 @@
 <head>
   <meta charset="utf-8">
   <title>MinecraftJS</title>
+  <script type="text/javascript" src="textures.js"></script>
+  <script type="text/javascript" src="world-structures.js"></script>
+  <script type="text/javascript" src="randomizer.js"></script>
   <script type="text/javascript">
   					// Spritesheet
-				var spriteSheetWidth = 256; // TODO : récupérer witdh image
-				var spriteSheetHeight = 256;
-				var spriteSheetCols = 16;
-				var spriteSheetRows = 16;
+		var spriteSheetWidth = 256; // TODO : récupérer witdh image
+		var spriteSheetHeight = 256;
+		var spriteSheetCols = 16;
+		var spriteSheetRows = 16;
 
-				// Sprite
-				var spriteWidth = (spriteSheetWidth / spriteSheetCols);
-				console.log(spriteWidth)
-				var spriteHeight = (spriteSheetHeight / spriteSheetRows);
-
-		var Grass = {
-			name : 'grass',
-			posX : 3,
-			posY : 0,
-		};
-
-		var Dirt = {
-			name : 'dirt',
-			posX : 2,
-			posY : 0,
-		};
-
-		var Sky = {
-			name : 'sky',
-			posX : -1,
-			posY : -1,
-		};
-
-		var Stone = {
-			name : 'stone',
-			posX : 1,
-			posY : 0,
-		};
-
-		var Leaf = {
-			name : 'leaf',
-			posX : 4,
-			posY : 3,
-		};
-
-		var Wood = {
-			name : 'wood',
-			posX : 4,
-			posY : 1,
-		};
-
-  		function randomNumberFromList(items) {
-  			var item = items[Math.floor(Math.random()*items.length)];
-  			return item;
-  		}
-
-  		function drawTree(ctx, spriteSheetImg, posX, posY) {
-        	var draw = false;
-
-        	for (var i = 0; i < 3; i++) {
-        		for (var j = 4; j >= 0; j--) {
-        			draw = false;
-
-        			// Feuille du dessus
-		        	if (i == 1 && j == 4) {
-			            var sourceX = Leaf.posX * spriteWidth;
-			            var sourceY = Leaf.posY * spriteHeight;
-			            draw = true;
-		        	}
-        			// Feuilles
-			       	if ((i == 0 || i == 1 || i == 2) && (j == 2 || j == 3)) {
-			            var sourceX = Leaf.posX * spriteWidth;
-			            var sourceY = Leaf.posY * spriteHeight;
-			            draw = true;
-		        	}
-
-		        	// Tronc
-		        	if (i == 1 && (j == 0 || j == 1)) {
-		        		var sourceX = Wood.posX * spriteWidth;
-			            var sourceY = Wood.posY * spriteHeight;
-			            draw = true;
-		        	}
-
-		            canvasX = (posX + i) * spriteWidth;
-		            canvasY = (posY - j) * spriteHeight;
-
-		            if (draw == true) {
-						ctx.drawImage(spriteSheetImg,
-						sourceX, sourceY, spriteWidth, spriteHeight,
-						canvasX, canvasY, spriteWidth, spriteHeight);
-		            }
-				}
-        	}
-  		}
-
+		// Sprite
+		var spriteWidth = (spriteSheetWidth / spriteSheetCols);
+		console.log(spriteWidth)
+		var spriteHeight = (spriteSheetHeight / spriteSheetRows);
 
 		function initializeLevel() {
 			var canvas = document.getElementById("canvas");
