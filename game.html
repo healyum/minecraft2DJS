@@ -110,19 +110,53 @@
 		}
   </script>
 	<style>
-		body{ background-color: black; margin: 0; }
-		canvas{ background-color: #6699ff; display: block; margin: 0 auto; }
-		canvas {
-		    image-rendering: optimizeSpeed;             // Older versions of FF
-		    image-rendering: -moz-crisp-edges;          // FF 6.0+
-		    image-rendering: -webkit-optimize-contrast; // Webkit
-		    image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
-		    image-rendering: optimize-contrast;         // Possible future browsers.
-		    -ms-interpolation-mode: nearest-neighbor;   // IE
+		body { 
+			background-color: #6699ff; 
+			margin: 0; 
+		}
+		canvas { 
+			display: block; margin: 0 auto; 
+			image-rendering: optimizeSpeed;             // Older versions of FF
+			image-rendering: optimize-contrast;         // Possible future browsers.
+		}
+		.canvas-game {
+			position: absolute;
+			margin-left: auto;
+			margin-right: auto;
+			left: 0;
+			right: 0;
+			text-align: center;
+			z-index: 1;
+		}
+		.canvas-background {
+			position: absolute;
+			left: 0; 
+			top: 0; 
+			z-index: 0;
+		}
+		.container {
+			position: relative;
+		}
+		.sliding-background {
+			background: url("cloud.png") repeat-x;
+			height: 480px;
+			width: 3600px;
+			/*animation: slide 30s linear infinite; Remove comment to animate */
+		}
+		@keyframes slide{
+			0% {
+				transform: translate3d(0, 0, 0);
+			}
+			100% {
+				transform: translate3d(-1692px, 0, 0);
+			}
 		}
 	</style>
 </head>
 <body onload="initializeLevel()">
-	<canvas id="canvas" width=1536 height=1920></canvas>
+	<div class="container">		
+		<canvas width=1536 height=1920 class="sliding-background canvas-background"></canvas>
+		<canvas id="canvas" width=1536 height=1920 class="canvas-game"></canvas>
+	</div>
 </body>
 </html>
