@@ -6,31 +6,32 @@
   <title>MinecraftJS</title>
   <script type="text/javascript">
   					// Spritesheet
-				var spriteSheetWidth = 700; // TODO : récupérer witdh image
-				var spriteSheetHeight = 700;
+				var spriteSheetWidth = 256; // TODO : récupérer witdh image
+				var spriteSheetHeight = 256;
 				var spriteSheetCols = 16;
 				var spriteSheetRows = 16;
 
 				// Sprite
-				var spriteWidth = spriteSheetWidth / spriteSheetCols;
-				var spriteHeight = spriteSheetHeight / spriteSheetRows;
+				var spriteWidth = (spriteSheetWidth / spriteSheetCols);
+				console.log(spriteWidth)
+				var spriteHeight = (spriteSheetHeight / spriteSheetRows);
 
 		var Grass = {
 			name : 'grass',
-			posX : 2,
+			posX : 3,
 			posY : 0,
 		};
 
 		var Dirt = {
 			name : 'dirt',
-			posX : 0,
+			posX : 2,
 			posY : 0,
 		};
 
 		var Sky = {
 			name : 'sky',
-			posX : 4,
-			posY : 1,
+			posX : -1,
+			posY : -1,
 		};
 
 		var Stone = {
@@ -41,19 +42,17 @@
 
 		var Leaf = {
 			name : 'leaf',
-			posX : 1,
-			posY : 1,
+			posX : 4,
+			posY : 3,
 		};
 
 		var Wood = {
 			name : 'wood',
-			posX : 0,
+			posX : 4,
 			posY : 1,
 		};
 
   		function randomNumberFromList(items) {
-  			// TODO : pouvoir générer à partir liste de tuile passée en paramètre qui retourne correspondance position
-  			// et retourner Y
   			var item = items[Math.floor(Math.random()*items.length)];
   			return item;
   		}
@@ -102,6 +101,7 @@
 			var canvas = document.getElementById("canvas");
 		    if (canvas.getContext) {
 		    	var ctx = canvas.getContext("2d");
+		    	ctx.scale(3, 3);
         	}
 
 			var spriteSheetImg = new Image();
@@ -134,9 +134,9 @@
 			        	}
 
 			        	if (col >= 10 && col < 20) {
-			        		var randomStoneOrDirt = randomNumberFromList([Stone.posX, Dirt.posY])
-				            var sourceX = randomStoneOrDirt * spriteWidth;
-				            var sourceY = 0 * spriteHeight;
+			        		var randomStoneOrDirt = randomNumberFromList([Stone, Dirt])
+				            var sourceX = randomStoneOrDirt.posX * spriteWidth;
+				            var sourceY = randomStoneOrDirt.posY * spriteHeight;
 			        	}
 
 			            canvasX = row * spriteWidth;
@@ -154,10 +154,10 @@
   </script>
 	<style>
 		body{ background-color: #AAAAAA; }
-		canvas{border:1px solid #348aed;}
+		canvas{border:1px solid #348aed; background-color: #6699ff;}
 	</style>
 </head>
 <body onload="initializeLevel()">
-	<canvas id="canvas" width=700 height=700></canvas>
+	<canvas id="canvas" width=768 height=768></canvas>
 </body>
 </html>
