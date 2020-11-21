@@ -10,9 +10,11 @@
   <script type="text/javascript">
   		// Spritesheet
 		var spriteSheetWidth = 256; // TODO : récupérer witdh image
-		var spriteSheetHeight = 2048;
+		var spriteSheetHeight = 256;
 		var spriteSheetCols = 16;
 		var spriteSheetRows = 16;
+		var worldCols = 40;
+		var worldRows = 32; 
 		var ctx;
 		var canvas;
 		var spriteSheetImg
@@ -36,8 +38,8 @@
 		function start() {
 			var canvasY = 0 - spriteHeight;
 			var canvasX = 0 - spriteWidth;
-		    for (var col = 0; col < spriteSheetCols; col++) {
-		        for (var row = 0; row < spriteSheetRows; row++) {
+		    for (var col = 0; col < worldCols; col++) {
+		        for (var row = 0; row < worldRows; row++) {
 
 		        	if (col < 5) {
 			            var sourceX = Sky.posX * spriteWidth;
@@ -60,6 +62,16 @@
 			            var sourceY = randomStoneOrDirt.posY * spriteHeight;
 		        	}
 
+		        	if (col >= 20 && col < 38) {
+			            var sourceX = Stone.posX * spriteWidth;
+			            var sourceY = Stone.posY * spriteHeight;
+		        	}
+
+		        	if (col >= 38) {
+			            var sourceX = Bedrock.posX * spriteWidth;
+			            var sourceY = Bedrock.posY * spriteHeight;
+		        	}
+
 		            canvasX = row * spriteWidth;
 		            canvasY = col * spriteHeight;
 
@@ -73,11 +85,11 @@
 		}
   </script>
 	<style>
-		body{ background-color: black; margin-top: 50px; }
+		body{ background-color: black; margin: 0; }
 		canvas{ background-color: #6699ff; display: block; margin: 0 auto; }
 	</style>
 </head>
 <body onload="initializeLevel()">
-	<canvas id="canvas" width=768 height=768></canvas>
+	<canvas id="canvas" width=1536 height=1920></canvas>
 </body>
 </html>

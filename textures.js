@@ -33,3 +33,9 @@ var Wood = {
 	posX : 4,
 	posY : 1,
 };
+
+var Bedrock = {
+	name : 'bedrock',
+	posX : 1,
+	posY : 1,
+};
