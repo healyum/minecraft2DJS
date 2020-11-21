@@ -8,70 +8,68 @@
   <script type="text/javascript" src="world-structures.js"></script>
   <script type="text/javascript" src="randomizer.js"></script>
   <script type="text/javascript">
-  					// Spritesheet
+  		// Spritesheet
 		var spriteSheetWidth = 256; // TODO : récupérer witdh image
-		var spriteSheetHeight = 256;
+		var spriteSheetHeight = 2048;
 		var spriteSheetCols = 16;
 		var spriteSheetRows = 16;
+		var ctx;
+		var canvas;
+		var spriteSheetImg
 
 		// Sprite
 		var spriteWidth = (spriteSheetWidth / spriteSheetCols);
-		console.log(spriteWidth)
 		var spriteHeight = (spriteSheetHeight / spriteSheetRows);
 
 		function initializeLevel() {
-			var canvas = document.getElementById("canvas");
+			canvas = document.getElementById("canvas");
 		    if (canvas.getContext) {
-		    	var ctx = canvas.getContext("2d");
+		    	ctx = canvas.getContext("2d");
 		    	ctx.scale(3, 3);
         	}
 
-			var spriteSheetImg = new Image();
-			spriteSheetImg.onload = start;
+			spriteSheetImg = new Image();
 			spriteSheetImg.src = "texture.png";
+			spriteSheetImg.onload = start;
+		}
 
-			console.log(spriteSheetImg);
+		function start() {
+			var canvasY = 0 - spriteHeight;
+			var canvasX = 0 - spriteWidth;
+		    for (var col = 0; col < spriteSheetCols; col++) {
+		        for (var row = 0; row < spriteSheetRows; row++) {
 
-			function start() {
+		        	if (col < 5) {
+			            var sourceX = Sky.posX * spriteWidth;
+			            var sourceY = Sky.posY * spriteHeight;
+		        	}
 
+		        	if (col >= 5 && col < 6) {
+			            var sourceX = Grass.posX * spriteWidth;
+			            var sourceY = Grass.posY * spriteHeight;
+		        	}
 
-				var canvasY = 0 - spriteHeight;
-				var canvasX = 0 - spriteWidth;
-			    for (var col = 0; col < spriteSheetCols; col++) {
-			        for (var row = 0; row < spriteSheetRows; row++) {
+		        	if (col >= 6 && col < 10) {
+			            var sourceX = Dirt.posX * spriteWidth;
+			            var sourceY = Dirt.posY * spriteHeight;
+		        	}
 
-			        	if (col < 5) {
-				            var sourceX = Sky.posX * spriteWidth;
-				            var sourceY = Sky.posY * spriteHeight;
-			        	}
+		        	if (col >= 10 && col < 20) {
+		        		var randomStoneOrDirt = randomNumberFromList([Stone, Dirt])
+			            var sourceX = randomStoneOrDirt.posX * spriteWidth;
+			            var sourceY = randomStoneOrDirt.posY * spriteHeight;
+		        	}
 
-			        	if (col >= 5 && col < 6) {
-				            var sourceX = Grass.posX * spriteWidth;
-				            var sourceY = Grass.posY * spriteHeight;
-			        	}
+		            canvasX = row * spriteWidth;
+		            canvasY = col * spriteHeight;
 
-			        	if (col >= 6 && col < 10) {
-				            var sourceX = Dirt.posX * spriteWidth;
-				            var sourceY = Dirt.posY * spriteHeight;
-			        	}
-
-			        	if (col >= 10 && col < 20) {
-			        		var randomStoneOrDirt = randomNumberFromList([Stone, Dirt])
-				            var sourceX = randomStoneOrDirt.posX * spriteWidth;
-				            var sourceY = randomStoneOrDirt.posY * spriteHeight;
-			        	}
-
-			            canvasX = row * spriteWidth;
-			            canvasY = col * spriteHeight;
-
-			            ctx.drawImage(spriteSheetImg,
-			            sourceX, sourceY, spriteWidth, spriteHeight,
-			            canvasX, canvasY, spriteWidth, spriteHeight);
-			        }
-			    }
-			    drawTree(ctx, spriteSheetImg, 7,4);
-			    drawTree(ctx, spriteSheetImg, 12,4);
-			}
+		            ctx.drawImage(spriteSheetImg,
+		            sourceX, sourceY, spriteWidth, spriteHeight,
+		            canvasX, canvasY, spriteWidth, spriteHeight);
+		        }
+		    }
+		    drawTree(ctx, spriteSheetImg, 7,4);
+		    drawTree(ctx, spriteSheetImg, 12,4);
 		}
   </script>
 	<style>
