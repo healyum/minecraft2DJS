@@ -21,6 +21,8 @@ var Player = {
             this.sourceX, this.sourceY, this.width, this.height, // origine image, jusqu'à taille et hauteur
             canvasX, canvasY, spriteWidth, spriteHeight); // position sur le canvas
 		}.bind(this);
+		//this.x = canvasX;
+		//this.y = canvasY;
 	}
 };
 

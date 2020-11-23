@@ -9,6 +9,7 @@
   <script type="text/javascript" src="js/textures.js"></script>
   <script type="text/javascript" src="js/world-structures.js"></script>
   <script type="text/javascript" src="js/randomizer.js"></script>
+  <script type="text/javascript" src="js/Player.js"></script>
   <script type="text/javascript">
   		// Spritesheet
 		var spriteSheetWidth = 256; // TODO : récupérer witdh image
@@ -35,42 +36,6 @@
 		const STONE_OR_BEDROCK_LAYER = 39;
 		const BEDROCK_LAYER = 40;
 
-		var Player = {
-			x: 0,
-			y: 0,			
-			initRow: 9,
-			initCol: 4,
-			sourceX: 0,
-			sourceY: 0,
-			width: 32,
-			height: 35,
-			src: "assets/images/littlesonic.png",
-			isFalling: true,
-			clear: function() {
-				ctx.clearRect(this.x, this.y, this.width, this.height);
-			},
-			draw: function(canvasX = this.initRow * spriteWidth, canvasY = this.initCol * spriteHeight) {
-				//var player = new Player();
-				sonicImg = new Image();
-				sonicImg.src = this.src;
-				sonicImg.onload = function() {
-		            ctx.drawImage(sonicImg,
-		            this.sourceX, this.sourceY, this.width, this.height, // origine image, jusqu'à taille et hauteur
-		            canvasX, canvasY, spriteWidth, spriteHeight); // position sur le canvas
-				}.bind(this);
-			}
-		};
-
-		function createPlayer() {
-			Player.draw();
-		}
-
-		function refreshPlayer() {
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			drawBall();
-			x += dx;
-			y += dy;
-		}
 
 		function initializeLevel() {
 			canvas = document.getElementById("canvas");
@@ -153,7 +118,7 @@
 		    drawTree(ctx, spriteSheetImg, 12,4);
 
 		    // TODO : Instancier Steve quand le monde a fini son initialisation
-		    createPlayer(ctx);
+		    drawPlayer();
 		}
   </script>
 
