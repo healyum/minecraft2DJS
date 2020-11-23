@@ -46,20 +46,30 @@
 			height: 35,
 			src: "assets/images/littlesonic.png",
 			isFalling: true,
+			clear: function() {
+				ctx.clearRect(this.x, this.y, this.width, this.height);
+			},
+			draw: function(canvasX = this.initRow * spriteWidth, canvasY = this.initCol * spriteHeight) {
+				//var player = new Player();
+				sonicImg = new Image();
+				sonicImg.src = this.src;
+				sonicImg.onload = function() {
+		            ctx.drawImage(sonicImg,
+		            this.sourceX, this.sourceY, this.width, this.height, // origine image, jusqu'à taille et hauteur
+		            canvasX, canvasY, spriteWidth, spriteHeight); // position sur le canvas
+				}.bind(this);
+			}
 		};
 
 		function createPlayer() {
-			//var player = new Player();
-			sonicImg = new Image();
-			sonicImg.src = Player.src;
-			sonicImg.onload = function() {
-				canvasX = Player.initRow * spriteWidth;
-				canvasY = Player.initCol * spriteHeight;
+			Player.draw();
+		}
 
-	            ctx.drawImage(sonicImg,
-	            Player.sourceX, Player.sourceY, Player.width, Player.height,
-	            canvasX, canvasY, spriteWidth, spriteHeight);
-			}
+		function refreshPlayer() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			drawBall();
+			x += dx;
+			y += dy;
 		}
 
 		function initializeLevel() {
