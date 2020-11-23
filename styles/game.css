@@ -3,6 +3,7 @@
 body { 
 	background-color: #6699ff; 
 	margin: 0; 
+	overflow-x: hidden; /* TODO : remove when viewport and scrolling will be added */
 }
 canvas { 
 	display: block; margin: 0 auto; 
@@ -31,7 +32,7 @@ canvas {
 	background: url("../assets/images/cloud.png") repeat-x;
 	height: 480px;
 	width: 3600px;
-	/*animation: slide 30s linear infinite; Remove comment to animate */
+	animation: slide 30s linear infinite;
 }
 @keyframes slide {
 	0% {

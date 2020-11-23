@@ -35,6 +35,33 @@
 		const STONE_OR_BEDROCK_LAYER = 39;
 		const BEDROCK_LAYER = 40;
 
+		var Player = {
+			x: 0,
+			y: 0,			
+			initRow: 9,
+			initCol: 4,
+			sourceX: 0,
+			sourceY: 0,
+			width: 32,
+			height: 35,
+			src: "assets/images/littlesonic.png",
+			isFalling: true,
+		};
+
+		function createPlayer() {
+			//var player = new Player();
+			sonicImg = new Image();
+			sonicImg.src = Player.src;
+			sonicImg.onload = function() {
+				canvasX = Player.initRow * spriteWidth;
+				canvasY = Player.initCol * spriteHeight;
+
+	            ctx.drawImage(sonicImg,
+	            Player.sourceX, Player.sourceY, Player.width, Player.height,
+	            canvasX, canvasY, spriteWidth, spriteHeight);
+			}
+		}
+
 		function initializeLevel() {
 			canvas = document.getElementById("canvas");
 		    if (canvas.getContext) {
@@ -116,6 +143,7 @@
 		    drawTree(ctx, spriteSheetImg, 12,4);
 
 		    // TODO : Instancier Steve quand le monde a fini son initialisation
+		    createPlayer(ctx);
 		}
   </script>
 
