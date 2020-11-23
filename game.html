@@ -20,7 +20,7 @@
 		var worldRows = 32; 
 		var ctx;
 		var canvas;
-		var spriteSheetImg
+		var spriteSheetImg;
 
 		// Sprite
 		var spriteWidth = (spriteSheetWidth / spriteSheetCols);
@@ -36,9 +36,14 @@
 		const STONE_OR_BEDROCK_LAYER = 39;
 		const BEDROCK_LAYER = 40;
 
+		// Player
+		var player = Object.create(Player);
 
 		function initializeLevel() {
 			canvas = document.getElementById("canvas");
+			canvas.focus(); // set focus on canvas so eventListener is triggered whithout clicking on the canvas
+			canvas.addEventListener('keydown', handleKeyPress);
+
 		    if (canvas.getContext) {
 		    	ctx = canvas.getContext("2d");
 		    	// remove unexpected space between tiles
@@ -126,7 +131,7 @@
 <body onload="initializeLevel()">
 	<div class="container">		
 		<canvas width=1536 height=1920 class="sliding-background canvas-background"></canvas>
-		<canvas id="canvas" width=1536 height=1920 class="canvas-game"></canvas>
+		<canvas id="canvas" width=1536 height=1920 class="canvas-game" tabindex="1"></canvas>
 	</div>
 </body>
 </html>
