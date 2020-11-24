@@ -33,7 +33,7 @@ var Player = {
 	},
 	draw: function(posX = this.initRow * spriteWidth, posY = this.initCol * spriteHeight) {
 		// effacer joueur
-		ctx.clearRect(this.x, this.y, spriteWidth, spriteHeight);
+		//ctx.clearRect(this.x, this.y, spriteWidth, spriteHeight);
 		//TODO : Ne pas checker promise avant chaque dessin, trop lourd
 		this.imageLoaded().then(function() {
 			// dessiner avec nouvelle position
@@ -62,5 +62,50 @@ function handleKeyPress(e) {
         case 39: console.log("Right"); player.draw(player.x + 16); break; //Right key
         case 40: console.log("Down"); break; //Down key
         default: ""; //Everything else
+    }
+}
+
+var IdleSprite = {
+	height: 39,
+	sprite1: {
+		x: 44,
+		y: 25,
+		width: 27,
+		height: 39,
+	},
+	sprite2: {
+		x: 74,
+		y: 25, // same
+		width: 26,
+		height: 39, // same
+	},
+
+	frameIndex: 0,
+	tickCount: 0,
+	ticksPerFrame: 16, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
+	numberOfFrames: 2 || 1,
+
+	render: function () {
+			var spriteList = [this.sprite1, this.sprite2]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
+
+		ctx.drawImage(newSonicImg,
+		spriteList[this.frameIndex].x, spriteList[this.frameIndex].y, spriteList[this.frameIndex].width, spriteList[this.frameIndex].height,
+		44, 50, 16, 20);
+	},
+
+	update: function () {
+        this.tickCount += 1;
+
+        if (this.tickCount > this.ticksPerFrame) {
+        	this.tickCount = 0;
+
+	        // If the current frame index is in range
+	        if (this.frameIndex < this.numberOfFrames - 1) {	
+	            // Go to the next frame
+	            this.frameIndex += 1;
+			} else {
+				this.frameIndex = 0;
+			}
+        }
     }
 }

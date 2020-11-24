@@ -22,6 +22,8 @@
 		var ctx;
 		var canvas;
 		var spriteSheetImg;
+		var newSonic;
+		var newSonicImg = new Image();
 
 		// Sprite
 		var spriteWidth = (spriteSheetWidth / spriteSheetCols);
@@ -61,16 +63,28 @@
 		    	ctx.imageSmoothingEnabled = false;
 
 		    	ctx.scale(3, 3);
+
+				newSonic = Object.create(IdleSprite);
         	}
 
 			spriteSheetImg = new Image();
 			spriteSheetImg.src = "assets/images/texture.png";
 			spriteSheetImg.onload = start;
+
+			newSonicImg.src = "assets/images/sonic-tilesheet.png";
+		}
+
+		function gameLoop() {
+			window.requestAnimationFrame(gameLoop);
+
+			newSonic.update();
+			newSonic.render();
 		}
 
 		function start() {
 			drawWorld();
 
+			gameLoop();
 			// TODO : Instancier Steve quand le monde a fini son initialisation
 			drawPlayer();
 		}
