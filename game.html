@@ -58,8 +58,6 @@
 		    if (canvas.getContext) {
 		    	ctx = canvas.getContext("2d");
 		    	// remove unexpected space between tiles
-		    	ctx.mozImageSmoothingEnabled = false;
-		    	ctx.webkitImageSmoothingEnabled = false;
 		    	ctx.imageSmoothingEnabled = false;
 
 		    	ctx.scale(3, 3);
