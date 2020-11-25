@@ -79,14 +79,40 @@ var IdleSprite = {
 		width: 26,
 		height: 39, // same
 	},
+	sprite3: {
+		x: 102,
+		y: 25, // same
+		width: 28,
+		height: 39, // same
+	},
+	sprite4: {
+		x: 132,
+		y: 25, // same
+		width: 28,
+		height: 39, // same
+	},
+	sprite5: {
+		x: 163,
+		y: 25, // same
+		width: 29,
+		height: 39, // same
+	},
+	sprite6: {
+		x: 197,
+		y: 25, // same
+		width: 28,
+		height: 39, // same
+	},
 
 	frameIndex: 0,
 	tickCount: 0,
-	ticksPerFrame: 16, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
-	numberOfFrames: 2 || 1,
+	ticksPerFrame: 10, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
+	numberOfFrames: 6 || 1,
 
 	render: function () {
-			var spriteList = [this.sprite1, this.sprite2]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
+		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4, this.sprite5, this.sprite6]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
+
+		ctx.clearRect(44,50, 16, 20);
 
 		ctx.drawImage(newSonicImg,
 		spriteList[this.frameIndex].x, spriteList[this.frameIndex].y, spriteList[this.frameIndex].width, spriteList[this.frameIndex].height,
