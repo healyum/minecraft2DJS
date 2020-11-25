@@ -6,12 +6,15 @@ body {
 	overflow-x: hidden; /* TODO : remove when viewport and scrolling will be added */
 }
 canvas { 
-	display: block; margin: 0 auto; 
-	image-rendering: optimizeSpeed;             // Older versions of FF
-	image-rendering: optimize-contrast;         // Possible future browsers.
+	display: block; 
+	margin: 0 auto; 
+	border: none;
+}
+canvas:focus {
+	outline: none;
 }
 .canvas-game {
-	position: absolute;
+	position: fixed;
 	margin-left: auto;
 	margin-right: auto;
 	left: 0;
