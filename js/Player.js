@@ -68,49 +68,49 @@ function handleKeyPress(e) {
 var IdleSprite = {
 	height: 39,
 	sprite1: {
-		x: 44,
+		x: 44-1, // -1 pixel because of spritesheet overflow and size must be the same. Have to probably switch to another tilesheet...
 		y: 25,
-		width: 27,
+		width: 29, // must be the same
 		height: 39,
 	},
 	sprite2: {
-		x: 74,
+		x: 74-1,
 		y: 25, // same
-		width: 26,
+		width: 29,
 		height: 39, // same
 	},
 	sprite3: {
-		x: 102,
+		x: 102-1,
 		y: 25, // same
-		width: 28,
+		width: 29,
 		height: 39, // same
 	},
 	sprite4: {
-		x: 132,
+		x: 132-1,
 		y: 25, // same
-		width: 28,
+		width: 29,
 		height: 39, // same
 	},
 	sprite5: {
-		x: 163,
+		x: 163-1,
 		y: 25, // same
 		width: 29,
 		height: 39, // same
 	},
 	sprite6: {
-		x: 197,
+		x: 197-1,
 		y: 25, // same
-		width: 28,
+		width: 29,
 		height: 39, // same
 	},
 
 	frameIndex: 0,
 	tickCount: 0,
-	ticksPerFrame: 10, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
-	numberOfFrames: 6 || 1,
+	ticksPerFrame: 18, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
+	numberOfFrames: 5 || 1,
 
 	render: function () {
-		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4, this.sprite5, this.sprite6]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
+		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4, this.sprite5]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
 
 		ctx.clearRect(44,50, 16, 20);
 
@@ -130,7 +130,7 @@ var IdleSprite = {
 	            // Go to the next frame
 	            this.frameIndex += 1;
 			} else {
-				this.frameIndex = 0;
+				this.frameIndex = 3; // permet de boucler sur les 2 dernières frames pour que sonic tapote du pied
 			}
         }
     }
