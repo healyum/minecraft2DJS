@@ -43,7 +43,12 @@
 		const PLAYER_SPEED_WALK = 2;
 
 		// Control
-		var keyState = {'isLeft': false}; 
+		var keyState = {IS_LEFT: false}; 
+		const LEFT_ARROW_KEY = 37;
+		const LEFT_Q_KEY = 81;
+		const RIGHT_ARROW_KEY = 39;
+		const RIGHT_D_ARROW_KEY = 68;
+		const IS_LEFT = 'is_left';
 
 		/*
 			TODO : idées pour le jeu
@@ -55,11 +60,13 @@
 
 		function initializeLevel() {
 			canvas = document.getElementById("canvas");
-			canvas.focus(); // set focus on canvas so eventListener is triggered whithout clicking on the canvas
+			// set focus on canvas so eventListener is triggered whithout clicking on the canvas
+			canvas.focus();
 
+			// movement
 			canvas.addEventListener('keydown', function(e) {
 			    keyState[e.keyCode || e.which] = true; // keyCode and which are legacy and should be replaced by code
-			    keyState['isLeft'] =  e.keyCode == 37 || e.keyCode == 81;
+			    keyState[IS_LEFT] =  e.keyCode == LEFT_ARROW_KEY || e.keyCode == LEFT_Q_KEY;
 			}, true);    
 			canvas.addEventListener('keyup', function(e) {
 			    keyState[e.keyCode || e.which] = false;
@@ -84,19 +91,18 @@
 				// start the gameloop
 				gameLoop();
         	}
-
-
 		}
 
 		function gameLoop() {
 			window.requestAnimationFrame(gameLoop);
 
-			if (keyState[39] || keyState[68]) { // RIGHT
+			// TODO: set custom move() method in Player object, and call it in Player.update() method instead
+			if (keyState[RIGHT_ARROW_KEY] || keyState[RIGHT_D_ARROW_KEY]) { // RIGHT
 			    Player.walkAnimation.render(Player.posX+=PLAYER_SPEED_WALK);
-			} else if (keyState[37] || keyState[81]) {
+			} else if (keyState[LEFT_ARROW_KEY] || keyState[LEFT_Q_KEY]) { // LEFT
 				Player.walkAnimation.render(Player.posX-=PLAYER_SPEED_WALK, Player.posY, true);
 			} else {
-				Player.idleAnimation.render(Player.posX, Player.posY, keyState['isLeft']);
+				Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
 			}
 
 			Player.update();
