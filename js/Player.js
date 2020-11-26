@@ -108,7 +108,7 @@ var WalkAnimation = {
 	ticksPerFrame: 8, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
 	numberOfFrames: 6 || 1,
 
-	render: function (posX = 44, posY = 50) {
+	render: function (posX = 44, posY = 50, hFlip = false) {
 		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4, this.sprite5, this.sprite6]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
 		
 		/* Tester zone effacement personnage (hitbox)
@@ -118,9 +118,19 @@ var WalkAnimation = {
 		*/
 		ctx.clearRect(posX, posY, 26, 26);
 
+   		ctx.save();
+
+		if (hFlip) {
+			ctx.translate(posX + 26/2, posY + 26/2);
+			ctx.scale(-1, 1);
+			ctx.translate(-(posX + 26/2), -(posY + 26/2));
+		}
+
 		ctx.drawImage(sonicTilesheetImg,
 		spriteList[this.frameIndex].x, spriteList[this.frameIndex].y, spriteList[this.frameIndex].width, spriteList[this.frameIndex].height,
 		posX, posY, 26, 26);
+
+		ctx.restore();
 	},
 
 	update: function () {
@@ -147,12 +157,22 @@ var IdleAnimation = {
 		width: 54,
 		height: 54,
 	},
-	render: function (posX, posY) {
+	render: function (posX, posY, hFlip = false) {
 		ctx.clearRect(posX, posY, 26, 26);
+
+		ctx.save();
+
+		if (hFlip) {
+			ctx.translate(posX + 26/2, posY + 26/2);
+			ctx.scale(-1, 1);
+			ctx.translate(-(posX + 26/2), -(posY + 26/2));
+		}
 
 		ctx.drawImage(sonicTilesheetImg,
 		this.sprite1.x, this.sprite1.y, this.sprite1.width, this.sprite1.height,
 		posX, posY, 26, 26);
+
+		ctx.restore();
 	},
 }
 

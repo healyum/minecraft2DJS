@@ -40,9 +40,10 @@
 
 		// Player
 		var Player;
+		const PLAYER_SPEED_WALK = 2;
 
 		// Control
-		var keyState = {}; 
+		var keyState = {'isLeft': false}; 
 
 		/*
 			TODO : idées pour le jeu
@@ -58,6 +59,7 @@
 
 			canvas.addEventListener('keydown', function(e) {
 			    keyState[e.keyCode || e.which] = true; // keyCode and which are legacy and should be replaced by code
+			    keyState['isLeft'] =  e.keyCode == 37 || e.keyCode == 81;
 			}, true);    
 			canvas.addEventListener('keyup', function(e) {
 			    keyState[e.keyCode || e.which] = false;
@@ -89,10 +91,12 @@
 		function gameLoop() {
 			window.requestAnimationFrame(gameLoop);
 
-			if (keyState[39] || keyState[68]){
-			    Player.walkAnimation.render(Player.posX+=2);
+			if (keyState[39] || keyState[68]) { // RIGHT
+			    Player.walkAnimation.render(Player.posX+=PLAYER_SPEED_WALK);
+			} else if (keyState[37] || keyState[81]) {
+				Player.walkAnimation.render(Player.posX-=PLAYER_SPEED_WALK, Player.posY, true);
 			} else {
-				Player.idleAnimation.render(Player.posX, Player.posY);
+				Player.idleAnimation.render(Player.posX, Player.posY, keyState['isLeft']);
 			}
 
 			Player.update();
