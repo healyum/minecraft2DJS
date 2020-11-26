@@ -57,15 +57,29 @@ function drawPlayer() {
 function handleKeyPress(e) {
     var code = e.keyCode;
     switch (code) {
-        case 37: console.log("Left"); player.draw(player.x - 16); break; //Left key
-        case 38: console.log("Up"); break; //Up key
-        case 39: console.log("Right"); player.draw(player.x + 16); break; //Right key
-        case 40: console.log("Down"); break; //Down key
+        case 37: 
+        	console.log("Left"); 
+    	     player.draw(player.x - 16); 
+    		 newSonic.render(newSonic.posX-=1.5)
+    	     break; //Left key
+        case 38: 
+    		console.log("Up");
+    		break; //Up key
+        case 39: 
+    		console.log("Right"); 
+    		player.draw(player.x + 16); 
+    		newSonic.render(newSonic.posX+=1.5)
+    		break; //Right key
+        case 40: 
+        	console.log("Down"); 
+        	break; //Down key
         default: ""; //Everything else
     }
 }
 
 var IdleSprite = {
+	posX: 44,
+	posY: 50,
 	sprite1: {
 		x: 438,
 		y: 66,
@@ -96,14 +110,14 @@ var IdleSprite = {
 	ticksPerFrame: 18, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
 	numberOfFrames: 4 || 1,
 
-	render: function () {
+	render: function (posX = this.posX, posY = posY) {
 		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
 
-		ctx.clearRect(44,50, 26, 26);
+		ctx.clearRect(posX, posY, 26, 26);
 
 		ctx.drawImage(newSonicImg,
 		spriteList[this.frameIndex].x, spriteList[this.frameIndex].y, spriteList[this.frameIndex].width, spriteList[this.frameIndex].height,
-		44, 50, 26, 26);
+		posX, posY, 26, 26);
 	},
 
 	update: function () {
@@ -125,6 +139,8 @@ var IdleSprite = {
 
 
 var WalkSprite = {
+		posX: 44,
+	posY: 50,
 	sprite1: {
 		x: 362,
 		y: 156,
@@ -168,14 +184,14 @@ var WalkSprite = {
 	ticksPerFrame: 8, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
 	numberOfFrames: 6 || 1,
 
-	render: function () {
+	render: function (posX = 44, posY = 50) {
 		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4, this.sprite5, this.sprite6]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
 		
-		ctx.clearRect(44,50, 26, 26);
+		ctx.clearRect(posX, posY, 26, 26);
 
 		ctx.drawImage(newSonicImg,
 		spriteList[this.frameIndex].x, spriteList[this.frameIndex].y, spriteList[this.frameIndex].width, spriteList[this.frameIndex].height,
-		44, 50, 26, 26);
+		posX, posY, 26, 26);
 	},
 
 	update: function () {
