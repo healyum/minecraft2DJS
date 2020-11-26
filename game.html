@@ -43,6 +43,9 @@
 		var player = Object.create(Player);
 		var ultimatePlayer;
 
+		// Control
+		var keyState = {}; 
+
 		/*
 			TODO : idées pour le jeu
 			- sonic saute et peut casser des cubes lorsqu'il saute et se met en boule
@@ -54,8 +57,17 @@
 		function initializeLevel() {
 			canvas = document.getElementById("canvas");
 			canvas.focus(); // set focus on canvas so eventListener is triggered whithout clicking on the canvas
-			canvas.addEventListener('keydown', handleKeyPress);
-			canvas.addEventListener('keyup', keyUp);
+
+
+
+			canvas.addEventListener('keydown', function(e) {
+			    keyState[e.keyCode || e.which] = true; // keyCode and which are legacy and should be replaced by code
+			}, true);    
+			canvas.addEventListener('keyup', function(e) {
+			    keyState[e.keyCode || e.which] = false;
+			}, true);
+			//canvas.addEventListener('keydown', handleKeyPress);
+			//canvas.addEventListener('keyup', keyUp);
 
 		    if (canvas.getContext) {
 		    	ctx = canvas.getContext("2d");
@@ -78,11 +90,19 @@
 		function gameLoop() {
 			window.requestAnimationFrame(gameLoop);
 
+			if (keyState[39] || keyState[68]){
+			    ultimatePlayer.walkAnimation.render(ultimatePlayer.posX+=2);
+			} else {
+				ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
+			}
+
 			//newSonic.update();
 			//newSonic.render();
 			ultimatePlayer.update();
 			ultimatePlayer.render();
 		}
+
+
 
 		function start() {
 			drawWorld();
