@@ -1,4 +1,4 @@
-function drawTree(ctx, spriteSheetImg, posX, posY) {
+function drawTree(ctx, textureTilesheetImg, posX, posY) {
 	var draw = false;
 
 	for (var i = 0; i < 3; i++) {
@@ -29,7 +29,7 @@ function drawTree(ctx, spriteSheetImg, posX, posY) {
 	        canvasY = (posY - j) * spriteHeight;
 
 	        if (draw == true) {
-				ctx.drawImage(spriteSheetImg,
+				ctx.drawImage(textureTilesheetImg,
 				sourceX, sourceY, spriteWidth, spriteHeight,
 				canvasX, canvasY, spriteWidth, spriteHeight);
 	        }
@@ -37,7 +37,7 @@ function drawTree(ctx, spriteSheetImg, posX, posY) {
 	}
 }
 
-function generateCoal(ctx, spriteSheetImg, posX, posY) {
+function generateCoal(ctx, textureTilesheetImg, posX, posY) {
 	var frequency = getRandomNumber(30);
 
 	if (frequency == 7) {
@@ -50,7 +50,7 @@ function generateCoal(ctx, spriteSheetImg, posX, posY) {
 				canvasX = (posX + i) * spriteWidth;
 				canvasY = (posY - j) * spriteHeight;
 
-				ctx.drawImage(spriteSheetImg,
+				ctx.drawImage(textureTilesheetImg,
 				sourceX, sourceY, spriteWidth, spriteHeight,
 				canvasX, canvasY, spriteWidth, spriteHeight);
 			}
@@ -59,7 +59,7 @@ function generateCoal(ctx, spriteSheetImg, posX, posY) {
 	return false;
 }
 
-function generateDiamond(ctx, spriteSheetImg, posX, posY) {
+function generateDiamond(ctx, textureTilesheetImg, posX, posY) {
 	var frequency = getRandomNumber(70);
 
 	if (frequency == 7) {
@@ -72,7 +72,7 @@ function generateDiamond(ctx, spriteSheetImg, posX, posY) {
 				canvasX = (posX + i) * spriteWidth;
 				canvasY = (posY - j) * spriteHeight;
 
-				ctx.drawImage(spriteSheetImg,
+				ctx.drawImage(textureTilesheetImg,
 				sourceX, sourceY, spriteWidth, spriteHeight,
 				canvasX, canvasY, spriteWidth, spriteHeight);
 			}

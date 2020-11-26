@@ -1,59 +1,6 @@
-var Player = {
-	x: 0,
-	y: 0,			
-	initRow: 9,
-	initCol: 4,
-	sourceX: 0,
-	sourceY: 0,
-	width: 32, // TODO : faire correspondre dimensions images réelles pour éviter calculs inutiles
-	height: 35,
-	image: new Image(),
-	imageLoaded: function() {
-		sonicImg = this.image;
-		sonicImg.src = this.src;
-
-	    return new Promise(function(resolve, reject) {
-			sonicImg.onload = resolve;
-		});
-	},
-	src: "assets/images/littlesonic.png",
-	isFalling: true,
-	clearMe: function() {
-		/* Tester zone effacement personnage (hitbox)
-		ctx.beginPath();
-		ctx.rect(this.x, this.y, spriteWidth, spriteHeight);
-		ctx.stroke();
-		*/
-
-		/*sonicImg = this.image;
-		sonicImg.src = this.src;
-		sonicImg.onload = function() {
-			//ctx.clearRect(this.x, this.y, spriteWidth, spriteHeight);
-		}.bind(this);*/
-	},
-	draw: function(posX = this.initRow * spriteWidth, posY = this.initCol * spriteHeight) {
-		// effacer joueur
-		//ctx.clearRect(this.x, this.y, spriteWidth, spriteHeight);
-		//TODO : Ne pas checker promise avant chaque dessin, trop lourd
-		this.imageLoaded().then(function() {
-			// dessiner avec nouvelle position
-            ctx.drawImage(sonicImg,
-            this.sourceX, this.sourceY, this.width, this.height, // origine image, jusqu'à taille et hauteur
-            posX, posY, spriteWidth, spriteHeight); // position sur le canvas, TODO : mettre width et height image, pas de la taille des tuiles
-		}.bind(this));
-
-		// Update position of the player after erase, so we erase old position of the player
-		this.x = posX;
-		this.y = posY;
-	}
-};
-
-function drawPlayer() {
-	player.draw();
-	// TODO : gérer collision
-}
-
-
+/**
+	PLAYER CLASS
+**/
 
 var BoredAnimation = {
 	posX: 44,
@@ -93,7 +40,7 @@ var BoredAnimation = {
 
 		ctx.clearRect(posX, posY, 26, 26);
 
-		ctx.drawImage(newSonicImg,
+		ctx.drawImage(sonicTilesheetImg,
 		spriteList[this.frameIndex].x, spriteList[this.frameIndex].y, spriteList[this.frameIndex].width, spriteList[this.frameIndex].height,
 		posX, posY, 26, 26);
 	},
@@ -114,7 +61,6 @@ var BoredAnimation = {
         }
     }
 }
-
 
 var WalkAnimation = {
 	posX: 44,
@@ -165,9 +111,14 @@ var WalkAnimation = {
 	render: function (posX = 44, posY = 50) {
 		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4, this.sprite5, this.sprite6]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
 		
+		/* Tester zone effacement personnage (hitbox)
+		ctx.beginPath();
+		ctx.rect(this.x, this.y, spriteWidth, spriteHeight);
+		ctx.stroke();
+		*/
 		ctx.clearRect(posX, posY, 26, 26);
 
-		ctx.drawImage(newSonicImg,
+		ctx.drawImage(sonicTilesheetImg,
 		spriteList[this.frameIndex].x, spriteList[this.frameIndex].y, spriteList[this.frameIndex].width, spriteList[this.frameIndex].height,
 		posX, posY, 26, 26);
 	},
@@ -199,55 +150,35 @@ var IdleAnimation = {
 	render: function (posX, posY) {
 		ctx.clearRect(posX, posY, 26, 26);
 
-		ctx.drawImage(newSonicImg,
+		ctx.drawImage(sonicTilesheetImg,
 		this.sprite1.x, this.sprite1.y, this.sprite1.width, this.sprite1.height,
 		posX, posY, 26, 26);
 	},
 }
 
-var ultimatePlayer = {
+/*
+	x: 0,
+	y: 0,			
+	initRow: 9,
+	initCol: 4,
+	sourceX: 0,
+	sourceY: 0,
+	width: 32,
+	height: 35,
+	initRow: 9,
+	initCol: 4,
+	isFalling: true,
+	*/
+var Player = {
 	posX: 44,
 	posY: 50,
 	idleAnimation: IdleAnimation,
 	walkAnimation: WalkAnimation,
 	update: function () {
 		/* TODO : appeler methodes de deplacement*/
-		ultimatePlayer.walkAnimation.update();
+		this.walkAnimation.update();
     },
 	render: function () {
 		//ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
 	},
-}
-
-// TODO : agréger en methode de Player ou créer classe à part en prévision gestion IA NPC (PNJ) ou d'ennemis
-function handleKeyPress(e) {
-    var code = e.keyCode;
-    switch (code) {
-        case 37: 
-        	console.log("Left"); 
-    	     //player.draw(player.x - 16); 
-    		 //newSonic.render(newSonic.posX-=1.5)
-    	     break; //Left key
-        case 38: 
-    		console.log("Up");
-    		break; //Up key
-        case 39: 
-    		console.log("Right"); 
-    		//player.draw(player.x + 16); 
-    		//newSonic.render(newSonic.posX+=1.5)
-    		//ultimatePlayer.walkAnimation.update(); // TODO : update moins fréquent ici que dans loop principal, voir pour déplacer logique ?
-    		ultimatePlayer.walkAnimation.render(ultimatePlayer.posX+=2);
-    		break; //Right key
-        case 40: 
-        	console.log("Down"); 
-        	break; //Down key
-        default: ""; //Everything else
-    }
-}
-
-function keyUp(e) {
-    var code = e.keyCode;
-    if (code) {
-    	ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
-    }
 }

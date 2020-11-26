@@ -29,13 +29,13 @@ function drawWorld() {
 	    	if (col >= STONE_OR_DIRT_LAYER && col < STONE_LAYER) {
 	            var sourceX = Stone.posX * spriteWidth;
 	            var sourceY = Stone.posY * spriteHeight;
-	            generateCoal(ctx, spriteSheetImg, row, col);
+	            generateCoal(ctx, textureTilesheetImg, row, col);
 	    	}
 
 	    	if (col >= STONE_LAYER && col < DIAMOND_LAYER) {
 	            var sourceX = Stone.posX * spriteWidth;
 	            var sourceY = Stone.posY * spriteHeight;
-	            generateDiamond(ctx, spriteSheetImg, row, col);
+	            generateDiamond(ctx, textureTilesheetImg, row, col);
 	    	}
 
 	    	if (col >= DIAMOND_LAYER && col < STONE_OR_BEDROCK_LAYER) {
@@ -52,12 +52,12 @@ function drawWorld() {
 	        canvasX = row * spriteWidth;
 	        canvasY = col * spriteHeight;
 
-	        ctx.drawImage(spriteSheetImg,
+	        ctx.drawImage(textureTilesheetImg,
 	        sourceX, sourceY, spriteWidth, spriteHeight,
 	        canvasX, canvasY, spriteWidth, spriteHeight);
 	    }
 	}
 	// TODO :  Instancier arbres sur blocs d'herbes et non position fixe
-	drawTree(ctx, spriteSheetImg, 7,4);
-	drawTree(ctx, spriteSheetImg, 12,4);
+	drawTree(ctx, textureTilesheetImg, 7,4);
+	drawTree(ctx, textureTilesheetImg, 12,4);
 }

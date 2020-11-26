@@ -21,9 +21,8 @@
 		var worldRows = 32; 
 		var ctx;
 		var canvas;
-		var spriteSheetImg;
-		var newSonic;
-		var newSonicImg = new Image();
+		var textureTilesheetImg = new Image();
+		var sonicTilesheetImg = new Image();
 
 		// Sprite
 		var spriteWidth = (spriteSheetWidth / spriteSheetCols);
@@ -40,8 +39,7 @@
 		const BEDROCK_LAYER = 40;
 
 		// Player
-		var player = Object.create(Player);
-		var ultimatePlayer;
+		var Player;
 
 		// Control
 		var keyState = {}; 
@@ -58,59 +56,47 @@
 			canvas = document.getElementById("canvas");
 			canvas.focus(); // set focus on canvas so eventListener is triggered whithout clicking on the canvas
 
-
-
 			canvas.addEventListener('keydown', function(e) {
 			    keyState[e.keyCode || e.which] = true; // keyCode and which are legacy and should be replaced by code
 			}, true);    
 			canvas.addEventListener('keyup', function(e) {
 			    keyState[e.keyCode || e.which] = false;
 			}, true);
-			//canvas.addEventListener('keydown', handleKeyPress);
-			//canvas.addEventListener('keyup', keyUp);
 
 		    if (canvas.getContext) {
 		    	ctx = canvas.getContext("2d");
-		    	// remove unexpected space between tiles
-		    	ctx.imageSmoothingEnabled = false;
+		    	ctx.imageSmoothingEnabled = false; // remove unexpected space between tiles
+		    	ctx.scale(3, 3); // zoom x3
 
-		    	ctx.scale(3, 3);
+		    	// creation of the player (sonic)
+				Player = Object.create(Player);
 
-				//newSonic = Object.create(WalkAnimation);
-				ultimatePlayer = Object.create(ultimatePlayer);
+				// load images
+				textureTilesheetImg.src = "assets/images/texture.png";
+				sonicTilesheetImg.src = "assets/images/sonic-tilesheet.png";
+
+				// when texture image is ready, draw world
+				textureTilesheetImg.onload = function () {
+					drawWorld();
+				}
+				// start the gameloop
+				gameLoop();
         	}
 
-			spriteSheetImg = new Image();
-			spriteSheetImg.src = "assets/images/texture.png";
-			spriteSheetImg.onload = start;
 
-			newSonicImg.src = "assets/images/sonic-tilesheet.png";
 		}
 
 		function gameLoop() {
 			window.requestAnimationFrame(gameLoop);
 
 			if (keyState[39] || keyState[68]){
-			    ultimatePlayer.walkAnimation.render(ultimatePlayer.posX+=2);
+			    Player.walkAnimation.render(Player.posX+=2);
 			} else {
-				ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
+				Player.idleAnimation.render(Player.posX, Player.posY);
 			}
 
-			//newSonic.update();
-			//newSonic.render();
-			ultimatePlayer.update();
-			ultimatePlayer.render();
-		}
-
-
-
-		function start() {
-			drawWorld();
-
-			gameLoop();
-			// TODO : Instancier Steve quand le monde a fini son initialisation
-			//drawPlayer();
-			ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
+			Player.update();
+			Player.render();
 		}
   </script>
 
