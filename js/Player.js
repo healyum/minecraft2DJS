@@ -53,31 +53,9 @@ function drawPlayer() {
 	// TODO : gérer collision
 }
 
-// TODO : agréger en methode de Player ou créer classe à part en prévision gestion IA NPC (PNJ) ou d'ennemis
-function handleKeyPress(e) {
-    var code = e.keyCode;
-    switch (code) {
-        case 37: 
-        	console.log("Left"); 
-    	     player.draw(player.x - 16); 
-    		 newSonic.render(newSonic.posX-=1.5)
-    	     break; //Left key
-        case 38: 
-    		console.log("Up");
-    		break; //Up key
-        case 39: 
-    		console.log("Right"); 
-    		player.draw(player.x + 16); 
-    		newSonic.render(newSonic.posX+=1.5)
-    		break; //Right key
-        case 40: 
-        	console.log("Down"); 
-        	break; //Down key
-        default: ""; //Everything else
-    }
-}
 
-var IdleSprite = {
+
+var BoredAnimation = {
 	posX: 44,
 	posY: 50,
 	sprite1: {
@@ -138,8 +116,8 @@ var IdleSprite = {
 }
 
 
-var WalkSprite = {
-		posX: 44,
+var WalkAnimation = {
+	posX: 44,
 	posY: 50,
 	sprite1: {
 		x: 362,
@@ -208,5 +186,68 @@ var WalkSprite = {
 				this.frameIndex = 0;
 			}
         }
+    }
+}
+
+var IdleAnimation = {
+	sprite1: {
+		x: 362,
+		y: 66,
+		width: 54,
+		height: 54,
+	},
+	render: function (posX, posY) {
+		ctx.clearRect(posX, posY, 26, 26);
+
+		ctx.drawImage(newSonicImg,
+		this.sprite1.x, this.sprite1.y, this.sprite1.width, this.sprite1.height,
+		posX, posY, 26, 26);
+	},
+}
+
+var ultimatePlayer = {
+	posX: 44,
+	posY: 50,
+	idleAnimation: IdleAnimation,
+	walkAnimation: WalkAnimation,
+	update: function () {
+		/* TODO : appeler methodes de deplacement*/
+		ultimatePlayer.walkAnimation.update();
+    },
+	render: function () {
+		//ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
+	},
+}
+
+// TODO : agréger en methode de Player ou créer classe à part en prévision gestion IA NPC (PNJ) ou d'ennemis
+function handleKeyPress(e) {
+    var code = e.keyCode;
+    switch (code) {
+        case 37: 
+        	console.log("Left"); 
+    	     //player.draw(player.x - 16); 
+    		 //newSonic.render(newSonic.posX-=1.5)
+    	     break; //Left key
+        case 38: 
+    		console.log("Up");
+    		break; //Up key
+        case 39: 
+    		console.log("Right"); 
+    		//player.draw(player.x + 16); 
+    		//newSonic.render(newSonic.posX+=1.5)
+    		//ultimatePlayer.walkAnimation.update(); // TODO : update moins fréquent ici que dans loop principal, voir pour déplacer logique ?
+    		ultimatePlayer.walkAnimation.render(ultimatePlayer.posX+=2);
+    		break; //Right key
+        case 40: 
+        	console.log("Down"); 
+        	break; //Down key
+        default: ""; //Everything else
+    }
+}
+
+function keyUp(e) {
+    var code = e.keyCode;
+    if (code) {
+    	ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
     }
 }

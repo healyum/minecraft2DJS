@@ -41,6 +41,7 @@
 
 		// Player
 		var player = Object.create(Player);
+		var ultimatePlayer;
 
 		/*
 			TODO : idées pour le jeu
@@ -54,6 +55,7 @@
 			canvas = document.getElementById("canvas");
 			canvas.focus(); // set focus on canvas so eventListener is triggered whithout clicking on the canvas
 			canvas.addEventListener('keydown', handleKeyPress);
+			canvas.addEventListener('keyup', keyUp);
 
 		    if (canvas.getContext) {
 		    	ctx = canvas.getContext("2d");
@@ -62,7 +64,8 @@
 
 		    	ctx.scale(3, 3);
 
-				newSonic = Object.create(WalkSprite);
+				//newSonic = Object.create(WalkAnimation);
+				ultimatePlayer = Object.create(ultimatePlayer);
         	}
 
 			spriteSheetImg = new Image();
@@ -75,8 +78,10 @@
 		function gameLoop() {
 			window.requestAnimationFrame(gameLoop);
 
-			newSonic.update();
-			newSonic.render();
+			//newSonic.update();
+			//newSonic.render();
+			ultimatePlayer.update();
+			ultimatePlayer.render();
 		}
 
 		function start() {
@@ -84,7 +89,8 @@
 
 			gameLoop();
 			// TODO : Instancier Steve quand le monde a fini son initialisation
-			drawPlayer();
+			//drawPlayer();
+			ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
 		}
   </script>
 
