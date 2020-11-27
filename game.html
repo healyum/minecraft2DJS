@@ -50,6 +50,9 @@
 		const RIGHT_D_ARROW_KEY = 68;
 		const IS_LEFT = 'is_left';
 
+		var lastLoop = new Date;
+		var fps, fpsId, thisLoop;
+
 		/*
 			TODO : idées pour le jeu
 			- sonic saute et peut casser des cubes lorsqu'il saute et se met en boule
@@ -93,6 +96,14 @@
         	}
 		}
 
+		function showFps() {
+			thisLoop = new Date;
+			fps = 1000 / (thisLoop - lastLoop);
+			lastLoop = thisLoop;
+			fpsId = document.getElementById('fps');
+			fpsId.innerHTML = "FPS: " + Math.round(fps); //Frames/sec
+		}
+
 		function gameLoop() {
 			window.requestAnimationFrame(gameLoop);
 
@@ -107,11 +118,15 @@
 
 			Player.update();
 			Player.render();
+
+			// Calcul des FPS
+			showFps();
 		}
   </script>
 
 </head>
 <body onload="initializeLevel()">
+	<div id="fps"></div>
 	<div class="container">		
 		<canvas width=1536 height=1920 class="sliding-background canvas-background"></canvas>
 		<canvas id="canvas" width=1536 height=1920 class="canvas-game" tabindex="1"></canvas>
