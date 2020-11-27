@@ -50,8 +50,9 @@
 		const RIGHT_D_ARROW_KEY = 68;
 		const IS_LEFT = 'is_left';
 
-		var lastLoop = new Date;
-		var fps, fpsId, thisLoop;
+		// fps
+		const times = [];
+		var fps, fpsId;
 
 		/*
 			TODO : idées pour le jeu
@@ -97,9 +98,12 @@
 		}
 
 		function showFps() {
-			thisLoop = new Date;
-			fps = 1000 / (thisLoop - lastLoop);
-			lastLoop = thisLoop;
+			const now = performance.now();
+			while (times.length > 0 && times[0] <= now - 1000) {
+				times.shift();
+			}
+			times.push(now);
+			fps = times.length;
 			fpsId = document.getElementById('fps');
 			fpsId.innerHTML = "FPS: " + Math.round(fps); //Frames/sec
 		}
