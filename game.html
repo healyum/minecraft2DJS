@@ -6,6 +6,7 @@
   <title>MinecraftJS</title>
   <link rel="icon" href="assets/images/favicon.png">
   <link href="styles/game.css" rel="stylesheet">
+  <script type="text/javascript" src="js/Game.js"></script>
   <script type="text/javascript" src="js/textures.js"></script>
   <script type="text/javascript" src="js/world.js"></script>
   <script type="text/javascript" src="js/world-structures.js"></script>
@@ -61,7 +62,6 @@
 			- timer et sonic doit descendre le plus vite possible chercher diamant/ring et le ramener dans un coffre
 			- scrolling horizontal et sonic doit sauter de plaforme en plateforme pour rester en vie
 		*/
-
 		function initializeLevel() {
 			canvas = document.getElementById("canvas");
 			// set focus on canvas so eventListener is triggered whithout clicking on the canvas
@@ -95,17 +95,6 @@
 				// start the gameloop
 				gameLoop();
         	}
-		}
-
-		function showFps() {
-			const now = performance.now();
-			while (times.length > 0 && times[0] <= now - 1000) {
-				times.shift();
-			}
-			times.push(now);
-			fps = times.length;
-			fpsId = document.getElementById('fps');
-			fpsId.innerHTML = "FPS: " + Math.round(fps); //Frames/sec
 		}
 
 		function gameLoop() {
