@@ -53,6 +53,9 @@
 
 		// fps
 		const times = [];
+		const times2 = [];
+		var now2;
+		var timeSinceMovement = 0;
 		var fps, fpsId;
 
 		/*
@@ -108,6 +111,10 @@
 			} else {
 				Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
 			}
+
+			//console.log(!keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY])
+
+			console.log(isPlayerAway(!keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY]))
 
 			Player.update();
 			Player.render();
