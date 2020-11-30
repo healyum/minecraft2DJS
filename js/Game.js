@@ -10,17 +10,25 @@ function showFps() {
 	fpsId.innerHTML = "FPS: " + Math.round(fps); //Frames/sec
 }
 
-function isPlayerAway(isAway) {
-	var now2 = performance.now();
-	const timeAway = 5000;
-	isAway ? now2 = performance.now() : timeSinceMovement = now2;
-	/*if (isAway) {
-		now2 = performance.now();
-	} else {
-		timeSinceMovement = now2;
-	}*/
-	if (now2 > timeSinceMovement + timeAway) {
-		return true;
+/* Return true if player is away since more than 5s */
+/* TODO: bug, trouver un moyen de retourner vrai/faux dans le else gauche/droite du gameloop */
+function isPlayerAway() {
+	const now = performance.now();
+	const timeBeforeBoredAnimation = 5000;
+	
+	if (!isNotMoving) {
+		timeOfLastMove = now;
 	}
-	return false;
+
+	// DEBUG: console.log("now " + now2 + " > timeOfLastMove:" +timeOfLastMove+ " timeBeforeBoredAnimation" + timeBeforeBoredAnimation)
+	startBoredAnimation = (now > timeOfLastMove + timeBeforeBoredAnimation) ? true : false;
+	return startBoredAnimation;
+}
+
+/* Refresh the status of moving player. We need to do it outside of if-else statement otherwise information is lost */
+function refreshIsPlayerAway() {
+	isNotMoving = !keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY];
+	if (!isNotMoving) {
+		isPlayerAway(false);
+	}
 }

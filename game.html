@@ -52,11 +52,14 @@
 		const IS_LEFT = 'is_left';
 
 		// fps
-		const times = [];
-		const times2 = [];
-		var now2;
-		var timeSinceMovement = 0;
 		var fps, fpsId;
+		const times = [];
+
+		// Bored Animation
+		var isNotMoving = true;
+		var timeOfLastMove = 0;
+
+
 
 		/*
 			TODO : idées pour le jeu
@@ -109,16 +112,14 @@
 			} else if (keyState[LEFT_ARROW_KEY] || keyState[LEFT_Q_KEY]) { // LEFT
 				Player.walkAnimation.render(Player.posX-=PLAYER_SPEED_WALK, Player.posY, true);
 			} else {
-				if (isPlayerAway(!keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY])) {
+				if (isPlayerAway()) {
 					Player.boredAnimation.render(Player.posX, Player.posY);
 				} else {
 					Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
 				}
 			}
 
-			//console.log(!keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY])
-
-			console.log(isPlayerAway(!keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY]))
+			refreshIsPlayerAway();
 
 			Player.update();
 			Player.render();
