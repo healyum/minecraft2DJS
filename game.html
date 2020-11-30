@@ -109,7 +109,11 @@
 			} else if (keyState[LEFT_ARROW_KEY] || keyState[LEFT_Q_KEY]) { // LEFT
 				Player.walkAnimation.render(Player.posX-=PLAYER_SPEED_WALK, Player.posY, true);
 			} else {
-				Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
+				if (isPlayerAway(!keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY])) {
+					Player.boredAnimation.render(Player.posX, Player.posY);
+				} else {
+					Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
+				}
 			}
 
 			//console.log(!keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY])

@@ -12,7 +12,7 @@ function showFps() {
 
 function isPlayerAway(isAway) {
 	var now2 = performance.now();
-	const timeAway = 10000;
+	const timeAway = 5000;
 	isAway ? now2 = performance.now() : timeSinceMovement = now2;
 	/*if (isAway) {
 		now2 = performance.now();

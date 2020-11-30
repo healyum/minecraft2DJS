@@ -194,9 +194,11 @@ var Player = {
 	posY: 50,
 	idleAnimation: IdleAnimation,
 	walkAnimation: WalkAnimation,
+	boredAnimation: BoredAnimation,
 	update: function () {
 		/* TODO : appeler methodes de deplacement*/
 		this.walkAnimation.update();
+		this.boredAnimation.update();
     },
 	render: function () {
 		//ultimatePlayer.idleAnimation.render(ultimatePlayer.posX, ultimatePlayer.posY);
