@@ -213,11 +213,11 @@ var RollAnimation = {
 
 	frameIndex: 0,
 	tickCount: 0,
-	ticksPerFrame: 18,
+	ticksPerFrame: 6,
 	numberOfFrames: 5 || 1,
 
 	render: function (posX = this.posX, posY = posY) {
-		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4]; 
+		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4, this.sprite5]; 
 
 		ctx.clearRect(posX, posY, 26, 26);
 

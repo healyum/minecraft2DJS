@@ -49,6 +49,8 @@
 		const LEFT_Q_KEY = 81;
 		const RIGHT_ARROW_KEY = 39;
 		const RIGHT_D_ARROW_KEY = 68;
+		const UP_ARROW = 38;
+		const UP_SPACEBAR = 32;
 		const IS_LEFT = 'is_left';
 
 		// fps
@@ -120,6 +122,11 @@
 			}
 
 			refreshIsPlayerAway();
+
+			// test jump animation
+			if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+				Player.rollAnimation.render(Player.posX, Player.posY);
+			}
 
 			Player.update();
 			Player.render();
