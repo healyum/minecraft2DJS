@@ -14,7 +14,7 @@ function showFps() {
 /* TODO: bug, trouver un moyen de retourner vrai/faux dans le else gauche/droite du gameloop */
 function isPlayerAway() {
 	const now = performance.now();
-	const timeBeforeBoredAnimation = 5000;
+	const timeBeforeBoredAnimation = 10000;
 	
 	if (!isNotMoving) {
 		timeOfLastMove = now;

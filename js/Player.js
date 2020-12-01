@@ -39,7 +39,7 @@ var BoredAnimation = {
 		var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
 
 		ctx.clearRect(posX, posY, 26, 26);
-
+		// draw to the right only for now
 		ctx.drawImage(sonicTilesheetImg,
 		spriteList[this.frameIndex].x, spriteList[this.frameIndex].y, spriteList[this.frameIndex].width, spriteList[this.frameIndex].height,
 		posX, posY, 26, 26);
