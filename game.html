@@ -125,7 +125,8 @@
 
 			// test jump animation
 			if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
-				Player.rollAnimation.render(Player.posX, Player.posY);
+				//Player.rollAnimation.render(Player.posX, Player.posY);
+				Player.jump();
 			}
 
 			Player.update();

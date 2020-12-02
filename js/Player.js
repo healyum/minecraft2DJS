@@ -259,10 +259,30 @@ var RollAnimation = {
 var Player = {
 	posX: 44,
 	posY: 50,
+	isFalling: true,
 	idleAnimation: IdleAnimation,
 	walkAnimation: WalkAnimation,
 	boredAnimation: BoredAnimation,
 	rollAnimation: RollAnimation,
+	jump: function() {
+		if (this.isFalling == false) {
+			while (this.posY > 0) {
+				console.log(this.posY);
+				//this.rollAnimation.update();
+				this.rollAnimation.render(Player.posX, Player.posY);
+				this.posY -= 5; // arbitrary jump height value
+				this.isFalling = true;
+			}
+		} else {
+			console.log(this.posY)
+			if (this.posY <= 50) {	// if player isnt jumping anymore, we have to make him fall
+				console.log(this.posY)
+				this.posY += 1;
+			} else {
+				this.isFalling = false;
+			}
+		}
+	},
 	update: function () {
 		/* TODO : appeler methodes de deplacement*/
 		this.walkAnimation.update();
