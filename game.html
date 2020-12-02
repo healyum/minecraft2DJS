@@ -127,6 +127,8 @@
 			if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
 				//Player.rollAnimation.render(Player.posX, Player.posY);
 				Player.jump();
+			} else {
+				Player.checkFalling();
 			}
 
 			Player.update();

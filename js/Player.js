@@ -270,17 +270,19 @@ var Player = {
 				console.log(this.posY);
 				//this.rollAnimation.update();
 				this.rollAnimation.render(Player.posX, Player.posY);
-				this.posY -= 5; // arbitrary jump height value
+				this.posY -= 1; // arbitrary jump height value
 				this.isFalling = true;
 			}
-		} else {
+		}
+	},
+	checkFalling: function () {
+		console.log(this.posY)
+		if (this.posY <= 50) {	// if player isnt jumping anymore, we have to make him fall
 			console.log(this.posY)
-			if (this.posY <= 50) {	// if player isnt jumping anymore, we have to make him fall
-				console.log(this.posY)
-				this.posY += 1;
-			} else {
-				this.isFalling = false;
-			}
+			this.posY += 1;
+			this.rollAnimation.render(Player.posX, Player.posY);
+		} else {
+			this.isFalling = false;
 		}
 	},
 	update: function () {
