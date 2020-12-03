@@ -272,6 +272,7 @@ var Player = {
 				this.posY -= 2; // arbitrary jump height value
 				if (this.posY < 10) {
 					this.isFalling = true;
+					this.rollAnimation.render(Player.posX, Player.posY);
 				}
 			
 		}

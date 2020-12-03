@@ -110,24 +110,35 @@
 
 			// TODO: set custom move() method in Player object, and call it in Player.update() method instead
 			if (keyState[RIGHT_ARROW_KEY] || keyState[RIGHT_D_ARROW_KEY]) { // RIGHT
-			    Player.walkAnimation.render(Player.posX+=PLAYER_SPEED_WALK);
-			} else if (keyState[LEFT_ARROW_KEY] || keyState[LEFT_Q_KEY]) { // LEFT
-				Player.walkAnimation.render(Player.posX-=PLAYER_SPEED_WALK, Player.posY, true);
-			} else {
-				if (isPlayerAway()) {
-					Player.boredAnimation.render(Player.posX, Player.posY);
+				if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+					Player.jump();
+					Player.posX+=PLAYER_SPEED_WALK
 				} else {
-					Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
+					Player.walkAnimation.render(Player.posX+=PLAYER_SPEED_WALK);
 				}
+			} else if (keyState[LEFT_ARROW_KEY] || keyState[LEFT_Q_KEY]) { // LEFT
+				if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+					Player.jump();
+					Player.posX-=PLAYER_SPEED_WALK
+				} else {
+					Player.walkAnimation.render(Player.posX-=PLAYER_SPEED_WALK, Player.posY, true);
+				}
+			} else {
+				if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+					Player.jump();
+				} else {
+					if (isPlayerAway()) {
+						Player.boredAnimation.render(Player.posX, Player.posY);
+					} else {
+						Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
+					}
+				}
+
 			}
 
 			refreshIsPlayerAway();
 
-			// test jump animation
-			if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
-				//Player.rollAnimation.render(Player.posX, Player.posY);
-				Player.jump();
-			} else {
+			if (!keyState[UP_ARROW] && !keyState[UP_SPACEBAR]) {
 				Player.checkFalling();
 			}
 
