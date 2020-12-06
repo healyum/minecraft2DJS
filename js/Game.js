@@ -27,8 +27,5 @@ function isPlayerAway() {
 
 /* Refresh the status of moving player. We need to do it outside of if-else statement otherwise information is lost */
 function refreshIsPlayerAway() {
-	isNotMoving = !keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY];
-	if (!isNotMoving) {
-		isPlayerAway(false);
-	}
+	isNotMoving = (!keyState[RIGHT_ARROW_KEY] && !keyState[RIGHT_D_ARROW_KEY] && !keyState[LEFT_ARROW_KEY] && !keyState[LEFT_Q_KEY] && !keyState[UP_ARROW] && !keyState[UP_SPACEBAR]);
 }
