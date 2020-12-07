@@ -2,17 +2,24 @@
 
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>MinecraftJS</title>
-  <link rel="icon" href="assets/images/favicon.png">
-  <link href="styles/game.css" rel="stylesheet">
-  <script type="text/javascript" src="js/Game.js"></script>
-  <script type="text/javascript" src="js/textures.js"></script>
-  <script type="text/javascript" src="js/world.js"></script>
-  <script type="text/javascript" src="js/world-structures.js"></script>
-  <script type="text/javascript" src="js/randomizer.js"></script>
-  <script type="text/javascript" src="js/Player.js"></script>
-  <script type="text/javascript">
+	<meta charset="utf-8">
+	<title>MinecraftJS</title>
+	<link rel="icon" href="assets/images/favicon.png">
+	<link href="styles/game.css" rel="stylesheet">
+	<script type="text/javascript" src="js/Game.js"></script>
+	<script type="text/javascript" src="js/textures.js"></script>
+	<script type="text/javascript" src="js/world.js"></script>
+	<script type="text/javascript" src="js/world-structures.js"></script>
+	<script type="text/javascript" src="js/randomizer.js"></script>
+
+		<!-- Load Player TODO: load ES6 way-->
+	<script type="text/javascript" src="js/Player/Animation/IdleAnimation.js"></script>
+	<script type="text/javascript" src="js/Player/Animation/BoredAnimation.js"></script>
+	<script type="text/javascript" src="js/Player/Animation/WalkAnimation.js"></script>
+	<script type="text/javascript" src="js/Player/Animation/RollAnimation.js"></script>
+	<script type="text/javascript" src="js/Player/Player.js"></script>
+
+	<script type="text/javascript">
   		// Spritesheet
 		var spriteSheetWidth = 256; // TODO : récupérer witdh image
 		var spriteSheetHeight = 256;
