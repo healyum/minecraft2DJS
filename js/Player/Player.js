@@ -25,7 +25,7 @@ var Player = {
 	boredAnimation: BoredAnimation,
 	rollAnimation: RollAnimation,
 	jump: function() {
-		if (this.isJumping == false) {
+		if (this.isJumping === false) {
 			//this.rollAnimation.update();
 			this.rollAnimation.render(Player.posX, Player.posY);
 			this.posY -= 2; // arbitrary jump height value
@@ -37,7 +37,7 @@ var Player = {
 		}
 	},
 	checkFalling: function () {
-		if (this.posY <= 50 && this.isFalling == true) {	// if player isnt jumping anymore, we have to make him fall
+		if (this.posY <= 50 && this.isFalling === true) {	// if player isnt jumping anymore, we have to make him fall
 			this.posY += 2;
 			this.rollAnimation.render(Player.posX, Player.posY);
 		} else {

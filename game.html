@@ -2,158 +2,158 @@
 
 <html lang="fr">
 <head>
-	<meta charset="utf-8">
-	<title>MinecraftJS</title>
-	<link rel="icon" href="assets/images/favicon.png">
-	<link href="styles/game.css" rel="stylesheet">
-	<script type="text/javascript" src="js/Game.js"></script>
-	<script type="text/javascript" src="js/textures.js"></script>
-	<script type="text/javascript" src="js/world.js"></script>
-	<script type="text/javascript" src="js/world-structures.js"></script>
-	<script type="text/javascript" src="js/randomizer.js"></script>
+    <meta charset="utf-8">
+    <title>MinecraftJS</title>
+    <link href="assets/images/favicon.png" rel="icon">
+    <link href="styles/game.css" rel="stylesheet">
+    <script src="js/Game.js" type="text/javascript"></script>
+    <script src="js/textures.js" type="text/javascript"></script>
+    <script src="js/world.js" type="text/javascript"></script>
+    <script src="js/world-structures.js" type="text/javascript"></script>
+    <script src="js/randomizer.js" type="text/javascript"></script>
 
-		<!-- Load Player TODO: load ES6 way-->
-	<script type="text/javascript" src="js/Player/Animation/IdleAnimation.js"></script>
-	<script type="text/javascript" src="js/Player/Animation/BoredAnimation.js"></script>
-	<script type="text/javascript" src="js/Player/Animation/WalkAnimation.js"></script>
-	<script type="text/javascript" src="js/Player/Animation/RollAnimation.js"></script>
-	<script type="text/javascript" src="js/Player/Player.js"></script>
+    <!-- Load Player TODO: load ES6 way-->
+    <script src="js/Player/Animation/IdleAnimation.js" type="text/javascript"></script>
+    <script src="js/Player/Animation/BoredAnimation.js" type="text/javascript"></script>
+    <script src="js/Player/Animation/WalkAnimation.js" type="text/javascript"></script>
+    <script src="js/Player/Animation/RollAnimation.js" type="text/javascript"></script>
+    <script src="js/Player/Player.js" type="text/javascript"></script>
 
-	<script type="text/javascript">
-  		// Spritesheet
-		var spriteSheetWidth = 256; // TODO : récupérer witdh image
-		var spriteSheetHeight = 256;
-		var spriteSheetCols = 16;
-		var spriteSheetRows = 16;
-		var worldCols = 40;
-		var worldRows = 32; 
-		var ctx;
-		var canvas;
-		var textureTilesheetImg = new Image();
-		var sonicTilesheetImg = new Image();
+    <script type="text/javascript">
+        // Spritesheet
+        var spriteSheetWidth = 256; // TODO : récupérer witdh image
+        var spriteSheetHeight = 256;
+        var spriteSheetCols = 16;
+        var spriteSheetRows = 16;
+        var worldCols = 40;
+        var worldRows = 32;
+        var ctx;
+        var canvas;
+        var textureTilesheetImg = new Image();
+        var sonicTilesheetImg = new Image();
 
-		// Sprite
-		var spriteWidth = (spriteSheetWidth / spriteSheetCols);
-		var spriteHeight = (spriteSheetHeight / spriteSheetRows);
+        // Sprite
+        var spriteWidth = (spriteSheetWidth / spriteSheetCols);
+        var spriteHeight = (spriteSheetHeight / spriteSheetRows);
 
-		// Layers of the world
-		const SKY_LAYER = 5;
-		const GRASS_LAYER = 6;
-		const DIRT_LAYER = 8;
-		const STONE_OR_DIRT_LAYER = 13;
-		const STONE_LAYER = 32;
-		const DIAMOND_LAYER = 37;
-		const STONE_OR_BEDROCK_LAYER = 39;
-		const BEDROCK_LAYER = 40;
+        // Layers of the world
+        const SKY_LAYER = 5;
+        const GRASS_LAYER = 6;
+        const DIRT_LAYER = 8;
+        const STONE_OR_DIRT_LAYER = 13;
+        const STONE_LAYER = 32;
+        const DIAMOND_LAYER = 37;
+        const STONE_OR_BEDROCK_LAYER = 39;
+        const BEDROCK_LAYER = 40;
 
-		// Player
-		var Player;
-		const PLAYER_SPEED_WALK = 2;
+        // Player
+        var Player;
+        const PLAYER_SPEED_WALK = 2;
 
-		// Control
-		var keyState = {IS_LEFT: false}; 
-		const LEFT_ARROW_KEY = 37;
-		const LEFT_Q_KEY = 81;
-		const RIGHT_ARROW_KEY = 39;
-		const RIGHT_D_ARROW_KEY = 68;
-		const UP_ARROW = 38;
-		const UP_SPACEBAR = 32;
-		const IS_LEFT = 'is_left';
+        // Control
+        var keyState = {IS_LEFT: false};
+        const LEFT_ARROW_KEY = 37;
+        const LEFT_Q_KEY = 81;
+        const RIGHT_ARROW_KEY = 39;
+        const RIGHT_D_ARROW_KEY = 68;
+        const UP_ARROW = 38;
+        const UP_SPACEBAR = 32;
+        const IS_LEFT = 'is_left';
 
-		// fps
-		var fps, fpsId;
-		const times = [];
+        // fps
+        var fps, fpsId;
+        const times = [];
 
-		// Bored Animation
-		var isNotMoving = true;
-		var timeOfLastMove = 0;
+        // Bored Animation
+        var isNotMoving = true;
+        var timeOfLastMove = 0;
 
-		function initializeLevel() {
-			canvas = document.getElementById("canvas");
-			// set focus on canvas so eventListener is triggered whithout clicking on the canvas
-			canvas.focus();
+        function initializeLevel() {
+            canvas = document.getElementById("canvas");
+            // set focus on canvas so eventListener is triggered whithout clicking on the canvas
+            canvas.focus();
 
-			// movement
-			canvas.addEventListener('keydown', function(e) {
-			    keyState[e.keyCode || e.which] = true; // keyCode and which are legacy and should be replaced by code
-			    keyState[IS_LEFT] =  e.keyCode == LEFT_ARROW_KEY || e.keyCode == LEFT_Q_KEY;
-			}, true);    
-			canvas.addEventListener('keyup', function(e) {
-			    keyState[e.keyCode || e.which] = false;
-			}, true);
+            // movement
+            canvas.addEventListener('keydown', function (e) {
+                keyState[e.keyCode || e.which] = true; // keyCode and which are legacy and should be replaced by code
+                keyState[IS_LEFT] = e.keyCode === LEFT_ARROW_KEY || e.keyCode === LEFT_Q_KEY;
+            }, true);
+            canvas.addEventListener('keyup', function (e) {
+                keyState[e.keyCode || e.which] = false;
+            }, true);
 
-		    if (canvas.getContext) {
-		    	ctx = canvas.getContext("2d");
-		    	ctx.imageSmoothingEnabled = false; // remove unexpected space between tiles
-		    	ctx.scale(3, 3); // zoom x3
+            if (canvas.getContext) {
+                ctx = canvas.getContext("2d");
+                ctx.imageSmoothingEnabled = false; // remove unexpected space between tiles
+                ctx.scale(3, 3); // zoom x3
 
-		    	// creation of the player (sonic)
-				Player = Object.create(Player);
+                // creation of the player (sonic)
+                Player = Object.create(Player);
 
-				// load images
-				textureTilesheetImg.src = "assets/images/texture.png";
-				sonicTilesheetImg.src = "assets/images/sonic-tilesheet.png";
+                // load images
+                textureTilesheetImg.src = "assets/images/texture.png";
+                sonicTilesheetImg.src = "assets/images/sonic-tilesheet.png";
 
-				// when texture image is ready, draw world
-				textureTilesheetImg.onload = function () {
-					drawWorld();
-				}
-				// start the gameloop
-				gameLoop();
-        	}
-		}
+                // when texture image is ready, draw world
+                textureTilesheetImg.onload = function () {
+                    drawWorld();
+                }
+                // start the gameloop
+                gameLoop();
+            }
+        }
 
-		function gameLoop() {
-			window.requestAnimationFrame(gameLoop);
+        function gameLoop() {
+            window.requestAnimationFrame(gameLoop);
 
-			// TODO: set custom move() method in Player object, and call it in Player.update() method instead
-			if (keyState[RIGHT_ARROW_KEY] || keyState[RIGHT_D_ARROW_KEY]) { // RIGHT
-				Player.posX+=PLAYER_SPEED_WALK;
-				if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
-					Player.jump();
-				} else {
-					Player.walkAnimation.render(Player.posX+=PLAYER_SPEED_WALK, Player.posY);
-				}
-			} else if (keyState[LEFT_ARROW_KEY] || keyState[LEFT_Q_KEY]) { // LEFT
-				Player.posX-=PLAYER_SPEED_WALK;
-				if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
-					Player.jump();
-				} else {
-					Player.walkAnimation.render(Player.posX-=PLAYER_SPEED_WALK, Player.posY, true);
-				}
-			} else {
-				if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
-					Player.jump();
-				} else {
-					if (isPlayerAway()) {
-						Player.boredAnimation.render(Player.posX, Player.posY);
-					} else {
-						Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
-					}
-				}
+            // TODO: set custom move() method in Player object, and call it in Player.update() method instead
+            if (keyState[RIGHT_ARROW_KEY] || keyState[RIGHT_D_ARROW_KEY]) { // RIGHT
+                Player.posX += PLAYER_SPEED_WALK;
+                if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+                    Player.jump();
+                } else {
+                    Player.walkAnimation.render(Player.posX += PLAYER_SPEED_WALK, Player.posY);
+                }
+            } else if (keyState[LEFT_ARROW_KEY] || keyState[LEFT_Q_KEY]) { // LEFT
+                Player.posX -= PLAYER_SPEED_WALK;
+                if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+                    Player.jump();
+                } else {
+                    Player.walkAnimation.render(Player.posX -= PLAYER_SPEED_WALK, Player.posY, true);
+                }
+            } else {
+                if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+                    Player.jump();
+                } else {
+                    if (isPlayerAway()) {
+                        Player.boredAnimation.render(Player.posX, Player.posY);
+                    } else {
+                        Player.idleAnimation.render(Player.posX, Player.posY, keyState[IS_LEFT]);
+                    }
+                }
 
-			}
+            }
 
-			refreshIsPlayerAway();
+            refreshIsPlayerAway();
 
-			if (!keyState[UP_ARROW] && !keyState[UP_SPACEBAR]) {
-				Player.checkFalling();
-			}
+            if (!keyState[UP_ARROW] && !keyState[UP_SPACEBAR]) {
+                Player.checkFalling();
+            }
 
-			Player.update();
-			Player.render();
+            Player.update();
+            Player.render();
 
-			// Calcul des FPS
-			showFps();
-		}
-  </script>
+            // Calcul des FPS
+            showFps();
+        }
+    </script>
 
 </head>
 <body onload="initializeLevel()">
-	<div id="fps"></div>
-	<div class="container">		
-		<canvas width=1536 height=1920 class="sliding-background canvas-background"></canvas>
-		<canvas id="canvas" width=1536 height=1920 class="canvas-game" tabindex="1"></canvas>
-	</div>
+<div id="fps"></div>
+<div class="container">
+    <canvas class="sliding-background canvas-background" height=1920 width=1536></canvas>
+    <canvas class="canvas-game" height=1920 id="canvas" tabindex="1" width=1536></canvas>
+</div>
 </body>
 </html>
