@@ -52,12 +52,12 @@
 
         // Control
         var keyState = {IS_LEFT: false};
-        const LEFT_ARROW_KEY = 37;
-        const LEFT_Q_KEY = 81;
-        const RIGHT_ARROW_KEY = 39;
-        const RIGHT_D_ARROW_KEY = 68;
-        const UP_ARROW = 38;
-        const UP_SPACEBAR = 32;
+        const LEFT_ARROW_KEY = 'ArrowLeft';
+        const LEFT_Q_KEY = 'keyQ';
+        const RIGHT_ARROW_KEY = 'ArrowRight';
+        const RIGHT_D_ARROW_KEY = 'keyD';
+        const UP_ARROW = 'ArrowUp';
+        const UP_SPACEBAR = 'Space';
         const IS_LEFT = 'is_left';
 
         // fps
@@ -75,11 +75,11 @@
 
             // movement
             canvas.addEventListener('keydown', function (e) {
-                keyState[e.keyCode || e.which] = true; // keyCode and which are legacy and should be replaced by code
-                keyState[IS_LEFT] = e.keyCode === LEFT_ARROW_KEY || e.keyCode === LEFT_Q_KEY;
+                keyState[e.code] = true;
+                keyState[IS_LEFT] = e.code === LEFT_ARROW_KEY || e.code === LEFT_Q_KEY;
             }, true);
             canvas.addEventListener('keyup', function (e) {
-                keyState[e.keyCode || e.which] = false;
+                keyState[e.code] = false;
             }, true);
 
             if (canvas.getContext) {
