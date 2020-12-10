@@ -109,20 +109,21 @@
             // TODO: set custom move() method in Player object, and call it in Player.update() method instead
             if (keyState[RIGHT_ARROW_KEY] || keyState[RIGHT_D_ARROW_KEY]) { // RIGHT
                 Player.posX += PLAYER_SPEED_WALK;
-                if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+                if ((keyState[UP_ARROW] || keyState[UP_SPACEBAR]) && Player.isFalling === false) {
                     Player.jump();
                 } else {
                     Player.walkAnimation.render(Player.posX += PLAYER_SPEED_WALK, Player.posY);
                 }
             } else if (keyState[LEFT_ARROW_KEY] || keyState[LEFT_Q_KEY]) { // LEFT
                 Player.posX -= PLAYER_SPEED_WALK;
-                if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+                if ((keyState[UP_ARROW] || keyState[UP_SPACEBAR]) && Player.isFalling === false) {
                     Player.jump();
                 } else {
                     Player.walkAnimation.render(Player.posX -= PLAYER_SPEED_WALK, Player.posY, true);
                 }
             } else {
-                if (keyState[UP_ARROW] || keyState[UP_SPACEBAR]) {
+                console.log(Player.isFalling);
+                if ((keyState[UP_ARROW] || keyState[UP_SPACEBAR]) && Player.isFalling === false) {
                     Player.jump();
                 } else {
                     if (isPlayerAway()) {
@@ -136,7 +137,7 @@
 
             refreshIsPlayerAway();
 
-            if (!keyState[UP_ARROW] && !keyState[UP_SPACEBAR]) {
+            if ((!keyState[UP_ARROW] && !keyState[UP_SPACEBAR]) || Player.isFalling === true) {
                 Player.checkFalling();
             }
 
