@@ -122,7 +122,6 @@
                     Player.walkAnimation.render(Player.posX -= PLAYER_SPEED_WALK, Player.posY, true);
                 }
             } else {
-                console.log(Player.isFalling);
                 if ((keyState[UP_ARROW] || keyState[UP_SPACEBAR]) && Player.isFalling === false) {
                     Player.jump();
                 } else {
