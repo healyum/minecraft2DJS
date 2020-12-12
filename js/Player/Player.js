@@ -19,6 +19,7 @@ var Player = {
 	posX: 44,
 	posY: 54,
 	isFalling: true,
+	jumpAllowed: true,
 	jumpHeight: 50,
 	jumpCelerity: 2,
 	posYBeforeJump: 54, // should be this.posY, but it is yet undefined at this point
@@ -27,12 +28,11 @@ var Player = {
 	boredAnimation: BoredAnimation,
 	rollAnimation: RollAnimation,
 	jump: function() {
-		if ((this.posY > (this.posYBeforeJump - this.jumpHeight) && this.isFalling === false) && keyState[UP_ARROW]) {
+		if ((this.posY > (this.posYBeforeJump - this.jumpHeight))) {
 			this.rollAnimation.render(Player.posX, Player.posY);
 			this.posY -= this.jumpCelerity; // arbitrary jump height value
 		}
 		else {
-			this.isFalling = true;
 			this.checkFalling();
 		}
 	},
@@ -42,13 +42,11 @@ var Player = {
 			if (this.posY < this.posYBeforeJump) {
 				this.posY += this.jumpCelerity;
 				this.rollAnimation.render(Player.posX, Player.posY);
-			}
-			if (this.posY >= this.posYBeforeJump) { // replace by collide with something in position Y
+			} else { // replace by collide with something in position Y
 				this.posYBeforeJump = this.posY;
 				this.isFalling = false;
+				(!keyState[UP_ARROW] || !keyState[UP_ARROW]) ? this.jumpAllowed = true : this.jumpAllowed = false;
 			}
-		} else {
-			this.isFalling = false;
 		}
 	},
 	update: function () {
