@@ -27,8 +27,12 @@ var Player = {
 	walkAnimation: WalkAnimation,
 	boredAnimation: BoredAnimation,
 	rollAnimation: RollAnimation,
+	playerSounds: PlayerSounds,
 	jump: function() {
 		if ((this.posY > (this.posYBeforeJump - this.jumpHeight))) {
+			if (this.posY === this.posYBeforeJump) {
+				this.playerSounds.playJump();
+			}
 			this.rollAnimation.render(Player.posX, Player.posY);
 			this.posY -= this.jumpCelerity; // arbitrary jump height value
 		}
@@ -38,7 +42,7 @@ var Player = {
 	},
 	checkFalling: function () {
 		this.isFalling = true;
-		if (this.isFalling === true) {	// if player isnt jumping anymore, we have to make him fall
+		if (this.isFalling === true) {	// if Player isnt jumping anymore, we have to make him fall
 			if (this.posY < this.posYBeforeJump) {
 				this.posY += this.jumpCelerity;
 				this.rollAnimation.render(Player.posX, Player.posY);
