@@ -1,3 +1,7 @@
+/**
+ WORLD CLASS
+ **/
+
 function drawWorld() {
     var canvasY = 0 - spriteHeight;
     var canvasX = 0 - spriteWidth;

@@ -1,3 +1,7 @@
+/**
+ TEXTURES CLASS
+ **/
+
 var Grass = {
     name: 'grass',
     posX: 3,

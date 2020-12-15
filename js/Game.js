@@ -1,3 +1,7 @@
+/**
+ GAME CLASS
+ **/
+
 function showFps() {
     const now = performance.now(); // return time in ms since the page loaded
     while (times.length > 0 && times[0] <= now - 1000) {

@@ -1,3 +1,7 @@
+/**
+ WORLD STRUCTURES CLASS
+ **/
+
 function drawTree(ctx, textureTilesheetImg, posX, posY) {
     var draw = false;
 
