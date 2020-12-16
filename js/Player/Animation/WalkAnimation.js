@@ -44,7 +44,7 @@ var WalkAnimation = {
     frameIndex: 0,
     tickCount: 0,
     ticksPerFrame: 8, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
-    numberOfFrames: 6 || 1,
+    numberOfFrames: 6,
 
     render: function (posX = 44, posY = 50, hFlip = false) {
         var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4, this.sprite5, this.sprite6]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick

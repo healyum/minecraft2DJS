@@ -32,7 +32,7 @@ var BoredAnimation = {
     frameIndex: 0,
     tickCount: 0,
     ticksPerFrame: 18, // de base 60 fps, si 4 alors vitesse / 4 soit 15 fps
-    numberOfFrames: 4 || 1,
+    numberOfFrames: 4,
 
     render: function (posX = this.posX, posY = this.posY) {
         var spriteList = [this.sprite1, this.sprite2, this.sprite3, this.sprite4]; // TODO : voir pour passer liste dans objet plutôt qu'instancier tableau à chaque tick
