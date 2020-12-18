@@ -4,6 +4,8 @@ A WIP Minecraft 2D in native JS using canvas
 
 **Sonicraft - A web 2d minecraft featuring sonic**
 
+![Image of Yaktocat](assets/readme/preview.png)
+*preview of the game*
 
 **TODO : gameideas**
 - make sonic jump and break sprites when he jumps and roll up
