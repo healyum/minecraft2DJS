@@ -4,7 +4,7 @@ A WIP Minecraft 2D in native JS using canvas
 
 **Sonicraft - A web 2d minecraft featuring sonic**
 
-![Image of Yaktocat](assets/readme/preview.png)
+![Preview of the game](assets/readme/preview.png)
 *preview of the game*
 
 **TODO : gameideas**
@@ -12,3 +12,14 @@ A WIP Minecraft 2D in native JS using canvas
 - destroy platforms randomly, and goal could be to stay alive the longest possible
 - create timer and goal is that sonic goes down the fastest to find diamond/ring and then he has to bring it back to the chest
 - horizontal scrolling and sonic must jumping from platforms to platforms to stay alive
+
+**TODO:**
+- Camera/Scrolling
+- Collision
+- Breaking block
+- Chunck
+- Improve map generation (add blocks, caves, structures)
+- Add mobs
+- Save/Load current map
+- Add inventory
+- Add water and handle water physics
